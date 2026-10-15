@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>2026 North vs South Tournament — Knights Live Tracker</title>
+<meta property="og:title" content="2026 North vs South Tournament — Knights Live Tracker">
+<meta name="twitter:title" content="2026 North vs South Tournament — Knights Live Tracker">
+<meta property="og:description" content="Live scores, game times, pool locations, and directions for The Bishop's School Knights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bishops-maroon: #7A0019;
+    --bishops-maroon-dark: #4D0010;
+    --bishops-maroon-deep: #2A0009;
+    --bishops-gold: #C5B358;
+    --bishops-gold-light: #E6D687;
+    --bishops-gold-glow: rgba(197, 179, 88, 0.22);
+    
+    --bg: #120205;
+    --card: #20050B;
+    --card-border: #4A101C;
+    --text: #FAF7F2;
+    --muted: #B8A2A6;
+    --win: #22c55e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    padding-bottom: 70px;
+    line-height: 1.4;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 14px; }
+
+  header {
+    background: linear-gradient(180deg, var(--bishops-maroon-dark) 0%, var(--card) 100%);
+    border-bottom: 3px solid var(--bishops-gold);
+    padding: 20px 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .knights-crest {
+    width: 44px;
+    height: 44px;
+    background: var(--bishops-maroon);
+    border: 2px solid var(--bishops-gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--bishops-gold);
+    box-shadow: 0 2px 10px var(--bishops-gold-glow);
+  }
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+  .status-tag {
+    font-size: 0.75rem;
+    color: var(--bishops-gold-light);
+    margin-top: 2px;
+  }
+
+  /* Next Game Hero Radar */
+  .next-section { margin: 16px 0; }
+  .next-card {
+    background: linear-gradient(135deg, var(--bishops-maroon) 0%, var(--card) 100%);
+    border: 2px solid var(--bishops-gold);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 25px var(--bishops-gold-glow);
+  }
+  .card-top-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .pill {
+    background: var(--bishops-gold);
+    color: var(--bishops-maroon-deep);
+    font-family: 'Oswald', sans-serif;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .matchup-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    text-align: center;
+  }
+  .team-focus {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    flex: 1;
+  }
+  .team-focus.bishops-active {
+    color: var(--bishops-gold);
+  }
+  .vs-badge {
+    color: var(--bishops-gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0 8px;
+  }
+  .venue-details {
+    font-size: 0.85rem;
+    color: var(--muted);
+    background: rgba(0,0,0,0.35);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .map-link {
+    color: var(--bishops-gold-light);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  /* Navigation Tabs */
+  nav.tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  nav.tabs button {
+    font-family: 'Oswald', sans-serif;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  nav.tabs button.active {
+    background: var(--bishops-gold);
+    color: var(--bishops-maroon-deep);
+    font-weight: 700;
+    border-color: var(--bishops-gold);
+  }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Match Cards */
+  .bracket-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .card-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--bishops-gold); }
+  
+  .game-item {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .game-item.highlighted {
+    border: 1px solid var(--bishops-gold);
+    background: rgba(197, 179, 88, 0.08);
+  }
+  .game-meta { font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; }
+  .match-teams { font-weight: 600; font-size: 0.9rem; }
+  .tbd-team { color: var(--muted); font-style: italic; font-weight: 400; }
+  
+  .score-display {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-width: 60px;
+    justify-content: flex-end;
+  }
+  .score-badge {
+    background: #000;
+    border: 1px solid var(--card-border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--text);
+  }
+  .score-badge.winner {
+    border-color: var(--win);
+    color: var(--win);
+  }
+  .final-pill {
+    font-size: 0.65rem;
+    background: var(--bishops-maroon);
+    color: var(--bishops-gold);
+    border: 1px solid var(--bishops-gold);
+    padding: 1px 5px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  .rules-box {
+    background: rgba(0,0,0,0.3);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .rules-box strong { color: var(--bishops-gold-light); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-top">
+    <div class="brand-group">
+      <div class="knights-crest">B</div>
+      <div>
+        <h1>The Bishop's School Knights</h1>
+        <p style="color:var(--muted); font-size:0.8rem;">2026 North vs South Tournament · Boys Varsity</p>
+        <div class="status-tag" id="syncStatus">Connecting to Tournament Live Sheet...</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <section class="next-section">
+    <div id="knightsNextCard" class="next-card">
+      <div class="card-top-tag">
+        <span class="pill">Knights Match Radar</span>
+        <span id="knightsDeckTime" style="color:var(--bishops-gold);">Detecting next match...</span>
+      </div>
+      <div class="matchup-row">
+        <div class="team-focus bishops-active" id="knightsT1">Bishops</div>
+        <div class="vs-badge">VS</div>
+        <div class="team-focus" id="knightsT2">Redwood</div>
+      </div>
+      <div class="venue-details">
+        <div>
+          <strong id="knightsMatchTag">Game 11 · Sacred Heart Prep</strong>
+          <div id="knightsVenueText">Sacred Heart Prep — 150 Valparaiso Ave, Atherton, CA</div>
+        </div>
+        <a id="knightsMapLink" href="https://www.google.com/maps/search/?api=1&query=150+Valparaiso+Ave,+Atherton,+CA+94027" target="_blank" class="map-link">Google Maps →</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabs" id="tabNav">
+    <button data-tab="fri" class="active">Friday (Oct 16)</button>
+    <button data-tab="sat">Saturday (Oct 17)</button>
+    <button data-tab="rules">Tournament Info</button>
+  </nav>
+
+  <div class="panel active" id="panel-fri">
+    <div id="friSHPList"></div>
+    <div id="friLAHSList"></div>
+  </div>
+  <div class="panel" id="panel-sat">
+    <div id="satSHPList"></div>
+    <div id="satLAHSList"></div>
+  </div>
+  <div class="panel" id="panel-rules">
+    <div class="bracket-card">
+      <div class="card-header"><span class="card-title">Tournament Rules & Sites</span></div>
+      <div class="rules-box">
+        <p><strong>Venues:</strong></p>
+        <p>• <strong>Sacred Heart Prep (SHP):</strong> 150 Valparaiso Ave, Atherton, CA 94027</p>
+        <p>• <strong>Los Altos High School (LAHS):</strong> 201 Almond Ave, Los Altos, CA 94022</p>
+        <br>
+        <p><strong>Rules & Format:</strong></p>
+        <p>• <strong>Quarter Length:</strong> Friday 7 minutes; Saturday 7 minutes.</p>
+        <p>• <strong>Overtime:</strong> Regulation high school rules (2 x 3 minute periods).</p>
+        <p>• <strong>Timeouts:</strong> 4 Time Outs per game (3 regular, 1 30-second timeout).</p>
+        <p>• <strong>Conduct:</strong> Coach receiving a yellow card must remain seated during actual play.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   CONFIG & BRACKET GRAPH
+   ========================================================================= */
+const CONFIG = {
+  sheetId: '1nkODQUBlIUfRjCGoRdsNntXHLuV941y9fqFRTjDmjss',
+  gid: '1917173912',
+  pollIntervalMs: 20000,
+  trackedTeam: 'Bishops',
+  teamAliases: ['bishops', "bishop's", 'the bishops school'],
+  warmupMinutesPrior: 60,
+
+  venues: {
+    SHP: { name: "Sacred Heart Prep", address: "150 Valparaiso Ave, Atherton, CA 94027", gmap: "https://www.google.com/maps/search/?api=1&query=150+Valparaiso+Ave,+Atherton,+CA+94027" },
+    LAHS: { name: "Los Altos High School", address: "201 Almond Ave, Los Altos, CA 94022", gmap: "https://www.google.com/maps/search/?api=1&query=201+Almond+Ave,+Los+Altos,+CA+94022" }
+  }
+};
+
+/* Complete 2026 North vs South 16-Team Bracket Map */
+const TOURNAMENT_GAMES = {
+  // Friday Oct 16 - Sacred Heart Prep
+  2:  { day: 'fri', site: 'SHP', time: '8:00 AM',  a: { type: 'static', name: 'Cathedral Catholic' }, b: { type: 'static', name: 'Los Altos' }, tag: 'Round of 16' },
+  4:  { day: 'fri', site: 'SHP', time: '9:05 AM',  a: { type: 'static', name: 'Sacred Heart Prep' },  b: { type: 'static', name: 'Loyola' }, tag: 'Round of 16' },
+  6:  { day: 'fri', site: 'SHP', time: '10:10 AM', a: { type: 'static', name: 'Newport Harbor' },     b: { type: 'static', name: 'Soquel' }, tag: 'Round of 16' },
+  8:  { day: 'fri', site: 'SHP', time: '11:15 AM', a: { type: 'static', name: 'Oaks Christian' },     b: { type: 'static', name: 'Campolindo' }, tag: 'Round of 16' },
+  5:  { day: 'fri', site: 'SHP', time: '12:20 PM', a: { type: 'static', name: 'Miramonte' },          b: { type: 'static', name: 'Santa Margarita' }, tag: 'Round of 16' },
+  7:  { day: 'fri', site: 'SHP', time: '1:25 PM',  a: { type: 'static', name: 'Harvard-Westlake' },   b: { type: 'static', name: 'Menlo' }, tag: 'Round of 16' },
+  9:  { day: 'fri', site: 'SHP', time: '2:30 PM',  a: { type: 'static', name: 'JSerra' },             b: { type: 'static', name: 'De La Salle' }, tag: 'Round of 16' },
+  11: { day: 'fri', site: 'SHP', time: '3:35 PM',  a: { type: 'static', name: 'Bishops' },            b: { type: 'static', name: 'Redwood' }, tag: 'Round of 16' },
+  
+  13: { day: 'fri', site: 'SHP', time: '4:40 PM',  a: { type: 'win', g: 2 }, b: { type: 'win', g: 4 }, tag: 'Quarterfinal' },
+  15: { day: 'fri', site: 'SHP', time: '5:45 PM',  a: { type: 'win', g: 6 }, b: { type: 'win', g: 8 }, tag: 'Quarterfinal' },
+  17: { day: 'fri', site: 'SHP', time: '6:50 PM',  a: { type: 'win', g: 5 }, b: { type: 'win', g: 7 }, tag: 'Quarterfinal' },
+  19: { day: 'fri', site: 'SHP', time: '7:55 PM',  a: { type: 'win', g: 9 }, b: { type: 'win', g: 11 }, tag: 'Quarterfinal' },
+
+  // Friday Oct 16 - Los Altos High School
+  10: { day: 'fri', site: 'LAHS', time: '3:35 PM', a: { type: 'lose', g: 2 }, b: { type: 'lose', g: 4 }, tag: 'Consolation Rd 1' },
+  12: { day: 'fri', site: 'LAHS', time: '4:40 PM', a: { type: 'lose', g: 6 }, b: { type: 'lose', g: 8 }, tag: 'Consolation Rd 1' },
+  14: { day: 'fri', site: 'LAHS', time: '5:45 PM', a: { type: 'lose', g: 5 }, b: { type: 'lose', g: 7 }, tag: 'Consolation Rd 1' },
+  16: { day: 'fri', site: 'LAHS', time: '6:50 PM', a: { type: 'lose', g: 9 }, b: { type: 'lose', g: 11 }, tag: 'Consolation Rd 1' },
+
+  // Saturday Oct 17 - Sacred Heart Prep
+  21: { day: 'sat', site: 'SHP', time: '8:00 AM',  a: { type: 'win', g: 13 }, b: { type: 'win', g: 15 }, tag: 'Semi Final' },
+  23: { day: 'sat', site: 'SHP', time: '9:10 AM',  a: { type: 'win', g: 17 }, b: { type: 'win', g: 19 }, tag: 'Semi Final' },
+  25: { day: 'sat', site: 'SHP', time: '10:20 AM', a: { type: 'lose', g: 13 }, b: { type: 'lose', g: 15 }, tag: '5th-8th Semi' },
+  27: { day: 'sat', site: 'SHP', time: '11:30 AM', a: { type: 'lose', g: 17 }, b: { type: 'lose', g: 19 }, tag: '5th-8th Semi' },
+  29: { day: 'sat', site: 'SHP', time: '12:40 PM', a: { type: 'lose', g: 21 }, b: { type: 'lose', g: 23 }, tag: '3rd Place' },
+  31: { day: 'sat', site: 'SHP', time: '1:50 PM',  a: { type: 'win', g: 21 },  b: { type: 'win', g: 23 },  tag: 'Championship' },
+  33: { day: 'sat', site: 'SHP', time: '3:00 PM',  a: { type: 'lose', g: 25 }, b: { type: 'lose', g: 27 }, tag: '7th Place' },
+  35: { day: 'sat', site: 'SHP', time: '4:10 PM',  a: { type: 'win', g: 25 },  b: { type: 'win', g: 27 },  tag: '5th Place' },
+
+  // Saturday Oct 17 - Los Altos High School
+  18: { day: 'sat', site: 'LAHS', time: '8:00 AM',  a: { type: 'win', g: 10 }, b: { type: 'win', g: 12 }, tag: '9th-12th Semi' },
+  20: { day: 'sat', site: 'LAHS', time: '9:10 AM',  a: { type: 'win', g: 14 }, b: { type: 'win', g: 16 }, tag: '9th-12th Semi' },
+  22: { day: 'sat', site: 'LAHS', time: '10:20 AM', a: { type: 'lose', g: 10 }, b: { type: 'lose', g: 12 }, tag: '13th-16th Semi' },
+  24: { day: 'sat', site: 'LAHS', time: '11:30 AM', a: { type: 'lose', g: 14 }, b: { type: 'lose', g: 16 }, tag: '13th-16th Semi' },
+  26: { day: 'sat', site: 'LAHS', time: '12:40 PM', a: { type: 'lose', g: 18 }, b: { type: 'lose', g: 20 }, tag: '11th Place' },
+  28: { day: 'sat', site: 'LAHS', time: '1:50 PM',  a: { type: 'win', g: 18 },  b: { type: 'win', g: 20 },  tag: '9th Place' },
+  30: { day: 'sat', site: 'LAHS', time: '3:00 PM',  a: { type: 'lose', g: 22 }, b: { type: 'lose', g: 24 }, tag: '15th Place' },
+  32: { day: 'sat', site: 'LAHS', time: '4:10 PM',  a: { type: 'win', g: 22 },  b: { type: 'win', g: 24 },  tag: '13th Place' }
+};
+
+let gameScores = {};
+
+function normalizeStr(s) {
+  return (s || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+function isTrackedTeam(teamName) {
+  if (!teamName) return false;
+  const norm = normalizeStr(teamName);
+  return CONFIG.teamAliases.some(a => norm.includes(normalizeStr(a)));
+}
+
+function resolveParticipant(spec) {
+  if (!spec) return null;
+  if (spec.type === 'static') return spec.name;
+  const outcome = getGameOutcome(spec.g);
+  if (!outcome) return null;
+  return spec.type === 'win' ? outcome.winner : outcome.loser;
+}
+
+function getGameTeams(gNum) {
+  const g = TOURNAMENT_GAMES[gNum];
+  if (!g) return [null, null];
+  return [resolveParticipant(g.a), resolveParticipant(g.b)];
+}
+
+function getGameOutcome(gNum) {
+  const [t1, t2] = getGameTeams(gNum);
+  const sc = gameScores[gNum];
+  if (!sc || sc.a === null || sc.b === null || isNaN(sc.a) || isNaN(sc.b)) return null;
+  const sa = Number(sc.a), sb = Number(sc.b);
+  if (sa === sb) return null;
+  return sa > sb ? { winner: t1, loser: t2, sa, sb } : { winner: t2, loser: t1, sa, sb };
+}
+
+/* =========================================================================
+   LIVE SHEET SYNC ENGINE (GVIZ & CSV FALLBACK)
+   ========================================================================= */
+function syncLiveSheet() {
+  const old = document.getElementById('gviz-sync');
+  if (old) old.remove();
+
+  const script = document.createElement('script');
+  script.id = 'gviz-sync';
+  script.src = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=responseHandler:handleLiveSheet&gid=${CONFIG.gid}&headers=0`;
+  document.body.appendChild(script);
+
+  // Parallel CSV Fetch in case of JSONP lag
+  fetch(`https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/export?format=csv&gid=${CONFIG.gid}`, { cache: 'no-store' })
+    .then(r => r.text())
+    .then(csv => parseCSVGrid(csv))
+    .catch(() => {});
+}
+
+window.handleLiveSheet = function(res) {
+  if (!res || !res.table || !res.table.rows) return;
+  const matrix = res.table.rows.map(r => {
+    if (!r.c) return [];
+    return r.c.map(c => (c ? (c.f !== undefined ? c.f : (c.v !== undefined ? c.v : '')) : '').toString().trim());
+  });
+  extractTournamentScores(matrix);
+};
+
+function parseCSVGrid(csv) {
+  const matrix = csv.split(/\r?\n/).map(line => {
+    return line.split(',').map(c => c.replace(/^"|"\$/g, '').trim());
+  });
+  extractTournamentScores(matrix);
+}
+
+function extractTournamentScores(matrix) {
+  let scoresFound = 0;
+
+  matrix.forEach((row, rIdx) => {
+    // 1. Time Shift Detection for Game 11 (Bishops)
+    const line = row.join(' ').toLowerCase();
+    if (CONFIG.teamAliases.some(a => line.includes(a))) {
+      const match = line.match(/(\d{1,2}:\d{2}\s*(?:am|pm)?)/i);
+      if (match) TOURNAMENT_GAMES[11].time = match[1].toUpperCase();
+    }
+
+    // 2. Scan Row by Game Number
+    row.forEach((cell, cIdx) => {
+      const numMatch = cell.match(/^#?\s*([0-9]{1,2})\$/);
+      if (numMatch) {
+        const gNum = parseInt(numMatch[1], 10);
+        if (TOURNAMENT_GAMES[gNum]) {
+          // Look across current row and next 2 rows for adjacent score pair
+          const neighborhood = [
+            ...(row.slice(cIdx, cIdx + 5)),
+            ...((matrix[rIdx + 1] || []).slice(cIdx, cIdx + 5))
+          ];
+
+          const ints = [];
+          neighborhood.forEach(v => {
+            if (v !== '' && !isNaN(v) && Number.isInteger(Number(v))) {
+              const val = Number(v);
+              if (val >= 0 && val <= 35 && val !== gNum) {
+                ints.push(val);
+              }
+            }
+          });
+
+          if (ints.length >= 2) {
+            gameScores[gNum] = { a: ints[0], b: ints[1] };
+            scoresFound++;
+          }
+        }
+      }
+    });
+  });
+
+  document.getElementById('syncStatus').innerText = 
+    `Live Sync Active · ${scoresFound} scores loaded (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`;
+  renderAll();
+}
+
+/* =========================================================================
+   UI RENDERING
+   ========================================================================= */
+function updateBishopsHeroRadar() {
+  let nextMatch = null;
+
+  // Search chronological games
+  const gameOrder = [11, 19, 16, 21, 23, 25, 27, 18, 20, 22, 24, 31, 29, 35, 33, 28, 26, 32, 30];
+  for (const gNum of gameOrder) {
+    const [t1, t2] = getGameTeams(gNum);
+    const outcome = getGameOutcome(gNum);
+    if (!outcome && (isTrackedTeam(t1) || isTrackedTeam(t2))) {
+      const g = TOURNAMENT_GAMES[gNum];
+      nextMatch = {
+        gNum,
+        t1,
+        t2,
+        time: g.time,
+        tag: `Game ${gNum} · ${g.tag}`,
+        venue: CONFIG.venues[g.site]
+      };
+      break;
+    }
+  }
+
+  if (nextMatch) {
+    document.getElementById('knightsT1').innerText = nextMatch.t1 || 'Bishops';
+    document.getElementById('knightsT2').innerText = nextMatch.t2 || 'TBD';
+    document.getElementById('knightsDeckTime').innerText = `${nextMatch.time} (On deck ${CONFIG.warmupMinutesPrior}m prior)`;
+    document.getElementById('knightsMatchTag').innerText = `${nextMatch.tag} · ${nextMatch.venue.name}`;
+    document.getElementById('knightsVenueText').innerText = `${nextMatch.venue.name} — ${nextMatch.venue.address}`;
+    document.getElementById('knightsMapLink').href = nextMatch.venue.gmap;
+  } else {
+    document.getElementById('knightsT1').innerText = CONFIG.trackedTeam;
+    document.getElementById('knightsT2').innerText = "Tournament Complete";
+    document.getElementById('knightsDeckTime').innerText = "All matches finished";
+  }
+}
+
+function renderSiteSection(targetId, siteKey, dayKey, sectionTitle) {
+  const container = document.getElementById(targetId);
+  const venue = CONFIG.venues[siteKey];
+
+  const gNums = Object.keys(TOURNAMENT_GAMES)
+    .map(Number)
+    .filter(gNum => TOURNAMENT_GAMES[gNum].day === dayKey && TOURNAMENT_GAMES[gNum].site === siteKey);
+
+  const rowsHtml = gNums.map(gNum => {
+    const g = TOURNAMENT_GAMES[gNum];
+    const [t1, t2] = getGameTeams(gNum);
+    const outcome = getGameOutcome(gNum);
+    const isKnights = isTrackedTeam(t1) || isTrackedTeam(t2);
+
+    let scoreMarkup = `<span style="color:var(--muted); font-size:0.8rem;">Upcoming</span>`;
+    if (outcome) {
+      scoreMarkup = `
+        <span class="final-pill">Final</span>
+        <span class="score-badge ${outcome.winner === t1 ? 'winner' : ''}">${outcome.sa}</span>
+        <span style="color:var(--muted); font-size:0.8rem;">-</span>
+        <span class="score-badge ${outcome.winner === t2 ? 'winner' : ''}">${outcome.sb}</span>
+      `;
+    }
+
+    return `
+      <div class="game-item ${isKnights ? 'highlighted' : ''}">
+        <div style="flex:1;">
+          <div class="game-meta">Game ${gNum} · ${g.time} · <span style="color:var(--bishops-gold); font-weight:600;">${g.tag}</span></div>
+          <div class="match-teams">
+            <span class="${!t1 ? 'tbd-team' : ''}" style="${isTrackedTeam(t1)?'color:var(--bishops-gold);font-weight:700;':(outcome && outcome.winner===t1?'color:var(--win);font-weight:700;':'')}">${t1 || 'TBD'}</span>
+            <span style="color:var(--muted);margin:0 4px;">vs</span>
+            <span class="${!t2 ? 'tbd-team' : ''}" style="${isTrackedTeam(t2)?'color:var(--bishops-gold);font-weight:700;':(outcome && outcome.winner===t2?'color:var(--win);font-weight:700;':'')}">${t2 || 'TBD'}</span>
+          </div>
+        </div>
+        <div class="score-display">${scoreMarkup}</div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="bracket-card">
+      <div class="card-header">
+        <span class="card-title">${sectionTitle}</span>
+        <a href="${venue.gmap}" target="_blank" style="color:var(--bishops-gold-light); font-size:0.8rem; text-decoration:none;">📍 ${venue.name}</a>
+      </div>
+      ${rowsHtml}
+    </div>
+  `;
+}
+
+function renderAll() {
+  updateBishopsHeroRadar();
+  renderSiteSection('friSHPList', 'SHP', 'fri', 'Sacred Heart Prep (Main Bracket)');
+  renderSiteSection('friLAHSList', 'LAHS', 'fri', 'Los Altos High School (Consolation)');
+  renderSiteSection('satSHPList', 'SHP', 'sat', 'Sacred Heart Prep (1st–8th Place)');
+  renderSiteSection('satLAHSList', 'LAHS', 'sat', 'Los Altos High School (9th–16th Place)');
+}
+
+document.getElementById('tabNav').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+});
+
+renderAll();
+syncLiveSheet();
+setInterval(syncLiveSheet, CONFIG.pollIntervalMs);
+</script>
+</body>
+</html>
