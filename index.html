@@ -2,259 +2,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>2026 North vs South Tournament — Knights Live Tracker</title>
-<meta property="og:title" content="2026 North vs South Tournament — Knights Live Tracker">
-<meta name="twitter:title" content="2026 North vs South Tournament — Knights Live Tracker">
-<meta property="og:description" content="Live scores, game times, pool locations, and directions for The Bishop's School Knights.">
+<title>Knights Tournament Tracker</title>
+<meta property="og:title" content="Knights Live Tournament Tracker">
+<meta property="og:description" content="Live game times, pool locations, directions, and scores, read straight from the tournament sheet.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bishops-maroon: #7A0019;
-    --bishops-maroon-dark: #4D0010;
-    --bishops-maroon-deep: #2A0009;
-    --bishops-gold: #C5B358;
-    --bishops-gold-light: #E6D687;
-    --bishops-gold-glow: rgba(197, 179, 88, 0.22);
-    
-    --bg: #120205;
-    --card: #20050B;
-    --card-border: #4A101C;
-    --text: #FAF7F2;
-    --muted: #B8A2A6;
-    --win: #22c55e;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif;
-    padding-bottom: 70px;
-    line-height: 1.4;
-  }
-  .container { max-width: 960px; margin: 0 auto; padding: 14px; }
+:root {
+  --maroon: #7A0019;
+  --maroon-dark: #4D0010;
+  --gold: #C5B358;
+  --gold-light: #E6D687;
+  --gold-glow: rgba(197, 179, 88, 0.22);
+  --bg: #120205;
+  --card: #20050B;
+  --card-2: #2A0810;
+  --line: #4A101C;
+  --text: #FAF7F2;
+  --muted: #B8A2A6;
+  --dim: #7E6468;
+  --win: #4ade80;
+  --live: #F59E0B;
+  --err: #F87171;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.4; padding-bottom: 40px; -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold-light); }
+.container { max-width: 960px; margin: 0 auto; padding-inline: 16px; }
+.num { font-family: 'Oswald', 'Inter', sans-serif; font-variant-numeric: tabular-nums; }
+header {
+  background: linear-gradient(180deg, var(--maroon-dark) 0%, var(--card) 100%);
+  border-bottom: 3px solid var(--gold); padding-block: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.brand-group { display: flex; align-items: center; gap: 12px; }
+.crest {
+  width: 44px; height: 44px; flex: none; background: var(--maroon);
+  border: 2px solid var(--gold); border-radius: 8px; display: grid; place-items: center;
+  font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 800; color: var(--gold);
+  box-shadow: 0 2px 10px var(--gold-glow);
+}
+header h1 { font-family: 'Cinzel', serif; font-size: 1.3rem; letter-spacing: 0.5px; color: #fff; text-wrap: balance; }
+.subtitle { font-size: 0.78rem; color: var(--gold-light); margin-top: 2px; }
+.sync { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.75rem; color: var(--muted); }
+.sync .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); flex: none; }
+.sync.ok .dot { background: var(--win); box-shadow: 0 0 8px var(--win); }
+.sync.loading .dot { background: var(--live); animation: pulse 1s infinite alternate; }
+.sync.error .dot { background: var(--err); }
+.sync.error { color: var(--err); }
+@keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
+.btn {
+  background: transparent; color: var(--gold-light); border: 1px solid var(--line);
+  border-radius: 6px; padding: 4px 10px; font: inherit; font-size: 0.75rem; cursor: pointer; text-decoration: none;
+}
+.btn:hover, .btn:focus-visible { border-color: var(--gold); outline: none; }
 
-  header {
-    background: linear-gradient(180deg, var(--bishops-maroon-dark) 0%, var(--card) 100%);
-    border-bottom: 3px solid var(--bishops-gold);
-    padding: 20px 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .brand-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .knights-crest {
-    width: 44px;
-    height: 44px;
-    background: var(--bishops-maroon);
-    border: 2px solid var(--bishops-gold);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--bishops-gold);
-    box-shadow: 0 2px 10px var(--bishops-gold-glow);
-  }
-  header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.5px;
-    color: #fff;
-  }
-  .status-tag {
-    font-size: 0.75rem;
-    color: var(--bishops-gold-light);
-    margin-top: 2px;
-  }
+.follow-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 0.75rem; color: var(--muted); margin-top: 8px;
+}
+.follow-row label { color: var(--gold-light); font-weight: 600; }
+.follow-row select {
+  background: var(--card-2); color: #fff; border: 1px solid var(--line);
+  border-radius: 6px; padding: 5px 8px; font: inherit; font-size: 0.8rem;
+}
+.follow-row select:focus-visible { outline: none; border-color: var(--gold); }
 
-  /* Next Game Hero Radar */
-  .next-section { margin: 16px 0; }
-  .next-card {
-    background: linear-gradient(135deg, var(--bishops-maroon) 0%, var(--card) 100%);
-    border: 2px solid var(--bishops-gold);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 4px 25px var(--bishops-gold-glow);
-  }
-  .card-top-tag {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.72rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .pill {
-    background: var(--bishops-gold);
-    color: var(--bishops-maroon-deep);
-    font-family: 'Oswald', sans-serif;
-    padding: 3px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-  .matchup-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 12px 0;
-    text-align: center;
-  }
-  .team-focus {
-    font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    flex: 1;
-  }
-  .team-focus.bishops-active {
-    color: var(--bishops-gold);
-  }
-  .vs-badge {
-    color: var(--bishops-gold);
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 0 8px;
-  }
-  .venue-details {
-    font-size: 0.85rem;
-    color: var(--muted);
-    background: rgba(0,0,0,0.35);
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .map-link {
-    color: var(--bishops-gold-light);
-    text-decoration: none;
-    font-weight: 700;
-  }
+.next-section { margin-block: 16px; }
+.next-card {
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--card) 100%);
+  border: 2px solid var(--gold); border-radius: var(--radius); padding: 16px;
+  box-shadow: 0 4px 25px var(--gold-glow);
+}
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.pill { background: var(--gold); color: var(--maroon-dark); padding: 3px 9px; border-radius: 999px; font-weight: 700; }
+.deck-time { color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+.matchup { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-block: 8px 12px; }
+.team-focus { font-family: 'Oswald', sans-serif; font-size: 1.45rem; font-weight: 700; line-height: 1.15; text-wrap: balance; }
+.team-focus.us { color: var(--gold-light); }
+.team-focus.tbd { color: var(--muted); font-weight: 500; font-size: 1.15rem; }
+.team-focus.right { text-align: right; }
+.vs { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: 0.9rem; border: 1px solid var(--gold); border-radius: 50%; width: 36px; height: 36px; display: grid; place-items: center; }
+.venue { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); border-top: 1px solid rgba(197,179,88,0.3); padding-top: 10px; }
+.venue strong { color: var(--text); display: block; font-size: 0.9rem; }
+.venue-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.map-link { background: var(--gold); color: var(--maroon-dark); padding: 7px 12px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.8rem; white-space: nowrap; }
+.map-link.secondary { background: transparent; color: var(--gold-light); border: 1px solid var(--gold); }
+.our-games { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.our-game { font-size: 0.72rem; padding: 4px 8px; border-radius: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); color: var(--muted); }
+.our-game.won { border-color: var(--win); color: var(--win); }
+.our-game.lost { border-color: var(--err); color: var(--err); }
+.our-game.next { border-color: var(--gold); color: var(--gold-light); }
 
-  /* Navigation Tabs */
-  nav.tabs {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    margin-bottom: 16px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--card-border);
-  }
-  nav.tabs button {
-    font-family: 'Oswald', sans-serif;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    color: var(--muted);
-    font-size: 0.9rem;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    white-space: nowrap;
-    text-transform: uppercase;
-  }
-  nav.tabs button.active {
-    background: var(--bishops-gold);
-    color: var(--bishops-maroon-deep);
-    font-weight: 700;
-    border-color: var(--bishops-gold);
-  }
-  .panel { display: none; }
-  .panel.active { display: block; }
+nav.tabs { display: flex; gap: 6px; overflow-x: auto; padding-block: 4px; scrollbar-width: none; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { flex: none; background: var(--card); color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+nav.tabs button.active { background: var(--maroon); color: #fff; border-color: var(--gold); }
+nav.tabs button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+nav.tabs button small { display: block; font-weight: 400; font-size: 0.68rem; color: var(--muted); }
+nav.tabs button.active small { color: var(--gold-light); }
+.panel { display: none; padding-top: 12px; }
+.panel.active { display: block; }
 
-  /* Match Cards */
-  .bracket-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 16px;
-  }
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: 8px;
-    margin-bottom: 12px;
-  }
-  .card-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--bishops-gold); }
-  
-  .game-item {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.04);
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-  }
-  .game-item.highlighted {
-    border: 1px solid var(--bishops-gold);
-    background: rgba(197, 179, 88, 0.08);
-  }
-  .game-meta { font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; }
-  .match-teams { font-weight: 600; font-size: 0.9rem; }
-  .tbd-team { color: var(--muted); font-style: italic; font-weight: 400; }
-  
-  .score-display {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    min-width: 60px;
-    justify-content: flex-end;
-  }
-  .score-badge {
-    background: #000;
-    border: 1px solid var(--card-border);
-    padding: 2px 7px;
-    border-radius: 4px;
-    color: var(--text);
-  }
-  .score-badge.winner {
-    border-color: var(--win);
-    color: var(--win);
-  }
-  .final-pill {
-    font-size: 0.65rem;
-    background: var(--bishops-maroon);
-    color: var(--bishops-gold);
-    border: 1px solid var(--bishops-gold);
-    padding: 1px 5px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    margin-right: 6px;
-  }
-
-  .rules-box {
-    background: rgba(0,0,0,0.3);
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .rules-box strong { color: var(--bishops-gold-light); }
+.bracket-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+.card-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; background: var(--card-2); border-bottom: 1px solid var(--line); }
+.card-title { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold-light); font-size: 1rem; }
+.card-sub { font-size: 0.74rem; color: var(--muted); }
+.card-header a { font-size: 0.78rem; text-decoration: none; }
+.card-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.game { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; padding: 10px 14px; border-bottom: 1px solid rgba(74,16,28,0.6); }
+.game:last-child { border-bottom: none; }
+.game.ours { background: rgba(197,179,88,0.08); box-shadow: inset 3px 0 0 var(--gold); }
+.game.live { box-shadow: inset 3px 0 0 var(--live); }
+.g-when { display: flex; flex-direction: column; }
+.g-time { font-family: 'Oswald', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.1; }
+.g-num { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.g-place { font-size: 0.68rem; color: var(--gold); font-weight: 600; }
+.g-teams { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.team { display: flex; align-items: center; gap: 7px; font-size: 0.93rem; min-width: 0; }
+.team .name { overflow-wrap: anywhere; }
+.team.us .name { color: var(--gold-light); font-weight: 700; }
+.team.won .name { color: var(--win); font-weight: 700; }
+.team.tbd .name { color: var(--dim); font-style: italic; }
+.team.proj .name { color: var(--muted); font-style: italic; }
+.team.proj .name::after { content: 'proj.'; font-size: 0.62rem; font-style: normal; color: var(--dim); margin-left: 5px; border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; vertical-align: middle; }
+.cap { width: 11px; height: 11px; border-radius: 50%; flex: none; border: 1px solid var(--dim); }
+.cap.dark { background: #1a2a4a; }
+.cap.white { background: #f2f2f2; }
+.g-score { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+.g-score span { line-height: 1.25; color: var(--muted); }
+.g-score span.won { color: var(--win); }
+.g-score .pending { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: var(--dim); font-weight: 500; }
+.g-score .pending.live { color: var(--live); }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px 14px; border-bottom: 1px solid rgba(74,16,28,0.6); font-size: 0.9rem; }
+th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+tr.us td { background: rgba(197,179,88,0.12); }
+tr.us td strong { color: var(--gold-light); }
+td.seed { width: 40px; font-family: 'Oswald', sans-serif; color: var(--gold); font-weight: 600; }
+.empty { padding: 28px 14px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+footer { margin-top: 20px; font-size: 0.72rem; color: var(--dim); text-align: center; }
+footer a { color: var(--muted); }
+@media (max-width: 480px) {
+  .game { grid-template-columns: 62px 1fr auto; gap: 8px; padding: 10px 10px; }
+  .g-time { font-size: 0.95rem; }
+  .team { font-size: 0.88rem; }
+  .team-focus { font-size: 1.2rem; }
+  header h1 { font-size: 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .sync.loading .dot { animation: none; } }
 </style>
 </head>
 <body>
@@ -262,358 +168,820 @@
 <header>
   <div class="container header-top">
     <div class="brand-group">
-      <div class="knights-crest">B</div>
+      <div class="crest">B</div>
       <div>
         <h1>The Bishop's School Knights</h1>
-        <p style="color:var(--muted); font-size:0.8rem;">2026 North vs South Tournament · Boys Varsity</p>
-        <div class="status-tag" id="syncStatus">Connecting to Tournament Live Sheet...</div>
+        <div class="subtitle" id="subtitle">North South Classic</div>
       </div>
     </div>
+    <div class="sync loading" id="sync">
+      <span class="dot"></span>
+      <span id="syncText">Loading the tournament sheet…</span>
+      <button class="btn" id="refreshBtn" type="button">Refresh</button>
+      <a class="btn" id="sheetLink" href="#" target="_blank" rel="noopener">Open sheet</a>
+      <button class="btn" id="changeSheetBtn" type="button">Change sheet</button>
+    </div>
+  </div>
+  <div class="container follow-row">
+    <label for="teamSelect">Following:</label>
+    <select id="teamSelect"><option value="Bishops">Bishops</option></select>
   </div>
 </header>
 
 <div class="container">
   <section class="next-section">
-    <div id="knightsNextCard" class="next-card">
-      <div class="card-top-tag">
-        <span class="pill">Knights Match Radar</span>
-        <span id="knightsDeckTime" style="color:var(--bishops-gold);">Detecting next match...</span>
+    <div class="next-card" id="nextCard">
+      <div class="card-top">
+        <span class="pill" id="nextPill">Knights next game</span>
+        <span class="deck-time" id="nextTime">Reading schedule…</span>
       </div>
-      <div class="matchup-row">
-        <div class="team-focus bishops-active" id="knightsT1">Bishops</div>
-        <div class="vs-badge">VS</div>
-        <div class="team-focus" id="knightsT2">Redwood</div>
+      <div class="matchup">
+        <div class="team-focus us" id="nextT1">Bishops</div>
+        <div class="vs">VS</div>
+        <div class="team-focus tbd right" id="nextT2">TBD</div>
       </div>
-      <div class="venue-details">
+      <div class="venue">
         <div>
-          <strong id="knightsMatchTag">Game 11 · Sacred Heart Prep</strong>
-          <div id="knightsVenueText">Sacred Heart Prep — 150 Valparaiso Ave, Atherton, CA</div>
+          <strong id="nextTag">Waiting for sheet</strong>
+          <span id="nextVenue"></span>
         </div>
-        <a id="knightsMapLink" href="https://www.google.com/maps/search/?api=1&query=150+Valparaiso+Ave,+Atherton,+CA+94027" target="_blank" class="map-link">Google Maps →</a>
+        <div class="venue-links">
+          <a id="nextMap" class="map-link" href="#" target="_blank" rel="noopener" hidden>Google Maps →</a>
+          <a id="nextMapApple" class="map-link secondary" href="#" target="_blank" rel="noopener" hidden>Apple Maps</a>
+        </div>
       </div>
+      <div class="our-games" id="ourGames"></div>
     </div>
   </section>
 
-  <nav class="tabs" id="tabNav">
-    <button data-tab="fri" class="active">Friday (Oct 16)</button>
-    <button data-tab="sat">Saturday (Oct 17)</button>
-    <button data-tab="rules">Tournament Info</button>
-  </nav>
+  <nav class="tabs" id="tabNav" aria-label="Tournament days"></nav>
+  <div id="panels"></div>
 
-  <div class="panel active" id="panel-fri">
-    <div id="friSHPList"></div>
-    <div id="friLAHSList"></div>
-  </div>
-  <div class="panel" id="panel-sat">
-    <div id="satSHPList"></div>
-    <div id="satLAHSList"></div>
-  </div>
-  <div class="panel" id="panel-rules">
-    <div class="bracket-card">
-      <div class="card-header"><span class="card-title">Tournament Rules & Sites</span></div>
-      <div class="rules-box">
-        <p><strong>Venues:</strong></p>
-        <p>• <strong>Sacred Heart Prep (SHP):</strong> 150 Valparaiso Ave, Atherton, CA 94027</p>
-        <p>• <strong>Los Altos High School (LAHS):</strong> 201 Almond Ave, Los Altos, CA 94022</p>
-        <br>
-        <p><strong>Rules & Format:</strong></p>
-        <p>• <strong>Quarter Length:</strong> Friday 7 minutes; Saturday 7 minutes.</p>
-        <p>• <strong>Overtime:</strong> Regulation high school rules (2 x 3 minute periods).</p>
-        <p>• <strong>Timeouts:</strong> 4 Time Outs per game (3 regular, 1 30-second timeout).</p>
-        <p>• <strong>Conduct:</strong> Coach receiving a yellow card must remain seated during actual play.</p>
-      </div>
-    </div>
-  </div>
+  <footer>
+    Scores and matchups are read live from the tournament Google Sheet and re-checked every minute.
+    Names marked <em>proj.</em> are worked out from entered scores before the sheet's organizer fills them in.
+    First team listed wears dark caps.
+  </footer>
 </div>
 
 <script>
-/* =========================================================================
-   CONFIG & BRACKET GRAPH
-   ========================================================================= */
-const CONFIG = {
-  sheetId: '1nkODQUBlIUfRjCGoRdsNntXHLuV941y9fqFRTjDmjss',
-  gid: '1917173912',
-  pollIntervalMs: 20000,
-  trackedTeam: 'Bishops',
-  teamAliases: ['bishops', "bishop's", 'the bishops school'],
-  warmupMinutesPrior: 60,
+/* ============================================================
+   CONFIGURATION
+   ============================================================ */
+const DEFAULT_SHEET_ID = '17IFuvSTdHGeQVRrKy3ET5ZD5X1gbJNN6733_U2XEhRc';   // North South Classic — Master 2026
+const DEFAULT_SHEET_GID = '0';
+const SNAPSHOT = { at: '2026-10-17T21:11:00-07:00', rows: [[],["","","Date:","Friday, October 16, 2026","","","","","","","","","","","","","","","","Final Rankings","","","Tournament Rules & Regulations:"],["","","Location:","Sacred Heart Prep","","","","","","","","","","","","","","","","1st","Cathedral","","- Length of quarters:  Friday  7 minutes;  Saturday  7 minutes"],["","","","","","","","","","","","","","","","","","","","2nd","Miramonte"],["","","Gm #","Time","Dark Caps","dark\nscore","white\nscore","White Caps","Type","","","","","","","","","","","3rd","Newport Harbor","","- Time outs: 4 Time Outs (3 regular and 1 30 sec)"],["","","2","8:00 AM","Cathedral","12","4","Los Altos","Rd. 1","","","","","","","","","","","4th","JSerra"],["","","4","9:05 AM","Sacred Heart","7","8","Loyola","","","","","","","","","","","","5th","Harvard-Westlake","","- Exclusions: Any act of vandalism or brutality will result in player (s) being excluded from the remainder of the tournament."],["","","6","10:10 AM","Newport Harbor","17","10","Soquel","","","","","","","","","","","","6th","Oaks Christian"],["","","8","11:15 AM","Oaks Christian","10","8","Campolindo","","","Date:","Friday, October 16, 2026","","","","","","","","7th","Redwood"],["","","5","12:20 PM","Miramonte","15","13","Santa Margarita","","","Location:","Los Altos High School","","","","","","","","8th","Loyola","","- Playing Rules: All National Federation High School Rules will be followed."],["","","7","1:25 PM","Harvard-Westlake","17","15","Menlo School","","","","","","dark\nscore","white\nscore","","","","","9th","Sacred Heart"],["","","9","2:30 PM","JSerra","15","8","De La Salle","","","Gm #","Time","Dark Caps","","","White Caps","Type","","","10th","Bishops","","- In addition, a coach receiving a yellow card must remain seated during actual play."],["","","11","3:35 PM","Bishops","13","14","Redwood","","","10","3:35 PM","Los Altos (L2)","6","16","Sacred Heart (L4)","Travel from SHP","","","11th","Menlo School"],["","","13","4:40 PM","Cathedral (W2)","13","6","Loyola (W4)","W2 vs W4","","12","4:40 PM","Soquel (L6)","9","17","Campolindo (L8)","Travel from SHP","","","12th","Campolindo"],["","","15","5:45 PM","Newport Harbor (W6)","11","9","Oaks Christian (W8)","W6 vs W8","","14","5:45 PM","Santa Margarita (L5)","16","18","Menlo School (L7)","Travel from SHP","","","13th","Soquel"],["","","17","6:50 PM","Miramonte (W5)","11","10","Harvard-Westlake (W7)","W5 vs W7","","16","6:50 PM","De La Salle (L9)","11","15","Bishops (L11)","Travel from SHP","","","14th","Santa Margarita"],["","","19","7:55 PM","JSerra (W9)","11","10","Redwood (W11)","W9 vs W11","","","","","","","","","","","15th","De La Salle"],["","","","","","","","","","","","","","","","","","","","16th","Los Altos"],["","","Date:","Saturday, October 17, 2026","","","","","","","Date:","Saturday, October 17, 2026"],["","","Location:","Sacred Heart Prep","","","","","","","Location:","Los Altos High School"],[],["","","Gm #","Time","Dark Caps","dark\nscore","white\nscore","White Caps","","","Gm #","Time","Dark Caps","","","White Caps","Type"],["","","21","8:00 AM","Cathedral (W13)","12","5","Newport Harbor (W15)","Semi- Final","","18","8:00 AM","Sacred Heart (W10)","12","11","Campolindo (W12)","9 - 12 bracket","","","Invited (Alpha)"],["","","23","9:10 AM","Miramonte (W17)","11","8","JSerra (W19)","Semi- Final","","20","9:10 AM","Menlo School (W14)","16","17","Bishops (W16)","9 - 12 bracket","","","Bishops"],["","","25","10:20 AM","Loyola (L13)","14","16","Oaks Christian (L15)","5 - 8 semi","","22","10:20 AM","Los Altos (L10)","8","10","Soquel (L12)","13 - 16 bracket","","","Campolindo"],["","","27","11:30 AM","Harvard-Westlake (L17)","14","10","Redwood (L19)","5 - 8 semi","","24","11:30 AM","Santa Margarita (L14)","18","15","De La Salle (L16)","13 - 16 bracket","","","Cathedral"],["","","29","12:40 PM","Newport Harbor (L21)","12","7","JSerra (L23)","3rd Place","","26","12:40 PM","Campolindo (L18)","12","13","Menlo School (L20)","11th Place","","","De La Salle"],["","","31","1:50 PM","Cathedral (W21)","12","10","Miramonte (W23)","1st Place","","28","1:50 PM","Sacred Heart (W18)","9","8","Bishops (W20)","9th Place","","","Harvard-Westlake"],["","","33","3:00 PM","Loyola (L25)","12","15","Redwood (L27)","7th Place","","30","3:00 PM","Los Altos (L22)","13","16","De La Salle (L24)","15th Place","","","JSerra"],["","","35","4:10 PM","Oaks Christian (W25)","12","13","Harvard-Westlake (W27)","5th Place","","32","4:10 PM","Soquel (W22)","13","11","Santa Margarita (W24)","13th Place","","","Los Altos"],["","","","","","","","","","","","","","","","","","","","Loyola"],["","","","","Location Information:","","","","","","","","Location Information:","","","","","","","Menlo School"],["","","","","Sacred Heart Prep","","SHP Pool Location","","","","","","Los Altos High School","","Los Altos Pool Location","","","","","Miramonte"],["","","","","150 Valparaiso Ave.","","","","","","","","201 Almond Ave","","","","","","","Newport Harbor"],["","","","","Atherton, CA 94027","","","","","","","","Los Altos, CA 94022","","","","","","","Oaks Christian"],["","","","","","","","","","","","","","","","","","","","Redwood"],["","","","","","","","","","","","","","","","","","","","Sacred Heart"],["","","","","","","","","","","","","","","","","","","","Santa Margarita"],["","","","","","","","","","","","","","","","","","","","Soquel"],[],[],["","","","","North South Challenge Site","","","SplashBracket Tournament Link","","","","","GOLS Live Events","","","@northvssouthwopo"]] };   // saved copy of the default sheet (North South Classic 2026), used until live data loads
+const DEFAULT_EVENT_NAME = 'North South Classic';
+let SHEET_ID = DEFAULT_SHEET_ID;
+let SHEET_GID = DEFAULT_SHEET_GID;
+// If the gid above isn't the schedule tab, these tab names are tried next (in order).
+const SHEET_TABS = ['Tournament Sheet', 'Schedule'];
+const SHEET_OVERRIDE_KEY = 'bhs_tracker_sheet_override';
+try {
+  const override = JSON.parse(localStorage.getItem(SHEET_OVERRIDE_KEY) || 'null');
+  if (override && override.id) { SHEET_ID = override.id; SHEET_GID = override.gid || '0'; }
+} catch (e) {}
+function extractSheetIdAndGid(url) {
+  const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  const gidMatch = url.match(/[?#&]gid=(\d+)/);
+  if (!idMatch) return null;
+  return { id: idMatch[1], gid: gidMatch ? gidMatch[1] : '0' };
+}
+const REFRESH_MS = 60 * 1000;
+const DEFAULT_TEAM = 'Bishops';
+// Teams for whom the "report 60 min before" deck-call rule applies (Bishops-specific, per coach).
+const DECK_CALL_TEAMS = new Set(['Bishops']);
 
-  venues: {
-    SHP: { name: "Sacred Heart Prep", address: "150 Valparaiso Ave, Atherton, CA 94027", gmap: "https://www.google.com/maps/search/?api=1&query=150+Valparaiso+Ave,+Atherton,+CA+94027" },
-    LAHS: { name: "Los Altos High School", address: "201 Almond Ave, Los Altos, CA 94022", gmap: "https://www.google.com/maps/search/?api=1&query=201+Almond+Ave,+Los+Altos,+CA+94022" }
+const VENUES = [
+  { match: /foothill/i, name: 'Foothill High School', address: '19251 Dodge Ave, Santa Ana, CA 92705' },
+  { match: /beckman/i, name: 'Beckman High School', address: '3588 Bryan Ave, Irvine, CA 92602' },
+  { match: /corona|\bcdm\b/i, name: 'Corona del Mar High School', address: '2101 Eastbluff Dr, Newport Beach, CA 92660' },
+  { match: /newport/i, name: 'Newport Harbor High School', address: '600 Irvine Ave, Newport Beach, CA 92663' },
+];
+const POOL_ALIASES = { fh: /foothill/i, beck: /beckman/i, nh: /newport/i, cdm: /cdm/i };
+
+function sheetQueryUrl(tab) {
+  const p = new URLSearchParams();
+  if (tab == null) p.set('gid', SHEET_GID); else p.set('sheet', tab);
+  p.set('headers', '0');
+  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?${p.toString()}`;
+}
+function sheetCsvUrl() {
+  return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}&_=${Date.now()}`;
+}
+// Cache is keyed to the sheet, so one tournament's rows never show up under another.
+const CACHE_KEY = `bhs_tracker_rows_v4_${SHEET_ID}_${SHEET_GID}`;
+
+/* ============================================================
+   CSV -> rows
+   ============================================================ */
+function parseCSV(text) {
+  const rows = []; let row = [], field = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else q = false; } else field += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(field); field = ''; }
+    else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+    else if (c === '\r') { /* skip */ }
+    else field += c;
   }
-};
-
-/* Complete 2026 North vs South 16-Team Bracket Map */
-const TOURNAMENT_GAMES = {
-  // Friday Oct 16 - Sacred Heart Prep
-  2:  { day: 'fri', site: 'SHP', time: '8:00 AM',  a: { type: 'static', name: 'Cathedral Catholic' }, b: { type: 'static', name: 'Los Altos' }, tag: 'Round of 16' },
-  4:  { day: 'fri', site: 'SHP', time: '9:05 AM',  a: { type: 'static', name: 'Sacred Heart Prep' },  b: { type: 'static', name: 'Loyola' }, tag: 'Round of 16' },
-  6:  { day: 'fri', site: 'SHP', time: '10:10 AM', a: { type: 'static', name: 'Newport Harbor' },     b: { type: 'static', name: 'Soquel' }, tag: 'Round of 16' },
-  8:  { day: 'fri', site: 'SHP', time: '11:15 AM', a: { type: 'static', name: 'Oaks Christian' },     b: { type: 'static', name: 'Campolindo' }, tag: 'Round of 16' },
-  5:  { day: 'fri', site: 'SHP', time: '12:20 PM', a: { type: 'static', name: 'Miramonte' },          b: { type: 'static', name: 'Santa Margarita' }, tag: 'Round of 16' },
-  7:  { day: 'fri', site: 'SHP', time: '1:25 PM',  a: { type: 'static', name: 'Harvard-Westlake' },   b: { type: 'static', name: 'Menlo' }, tag: 'Round of 16' },
-  9:  { day: 'fri', site: 'SHP', time: '2:30 PM',  a: { type: 'static', name: 'JSerra' },             b: { type: 'static', name: 'De La Salle' }, tag: 'Round of 16' },
-  11: { day: 'fri', site: 'SHP', time: '3:35 PM',  a: { type: 'static', name: 'Bishops' },            b: { type: 'static', name: 'Redwood' }, tag: 'Round of 16' },
-  
-  13: { day: 'fri', site: 'SHP', time: '4:40 PM',  a: { type: 'win', g: 2 }, b: { type: 'win', g: 4 }, tag: 'Quarterfinal' },
-  15: { day: 'fri', site: 'SHP', time: '5:45 PM',  a: { type: 'win', g: 6 }, b: { type: 'win', g: 8 }, tag: 'Quarterfinal' },
-  17: { day: 'fri', site: 'SHP', time: '6:50 PM',  a: { type: 'win', g: 5 }, b: { type: 'win', g: 7 }, tag: 'Quarterfinal' },
-  19: { day: 'fri', site: 'SHP', time: '7:55 PM',  a: { type: 'win', g: 9 }, b: { type: 'win', g: 11 }, tag: 'Quarterfinal' },
-
-  // Friday Oct 16 - Los Altos High School
-  10: { day: 'fri', site: 'LAHS', time: '3:35 PM', a: { type: 'lose', g: 2 }, b: { type: 'lose', g: 4 }, tag: 'Consolation Rd 1' },
-  12: { day: 'fri', site: 'LAHS', time: '4:40 PM', a: { type: 'lose', g: 6 }, b: { type: 'lose', g: 8 }, tag: 'Consolation Rd 1' },
-  14: { day: 'fri', site: 'LAHS', time: '5:45 PM', a: { type: 'lose', g: 5 }, b: { type: 'lose', g: 7 }, tag: 'Consolation Rd 1' },
-  16: { day: 'fri', site: 'LAHS', time: '6:50 PM', a: { type: 'lose', g: 9 }, b: { type: 'lose', g: 11 }, tag: 'Consolation Rd 1' },
-
-  // Saturday Oct 17 - Sacred Heart Prep
-  21: { day: 'sat', site: 'SHP', time: '8:00 AM',  a: { type: 'win', g: 13 }, b: { type: 'win', g: 15 }, tag: 'Semi Final' },
-  23: { day: 'sat', site: 'SHP', time: '9:10 AM',  a: { type: 'win', g: 17 }, b: { type: 'win', g: 19 }, tag: 'Semi Final' },
-  25: { day: 'sat', site: 'SHP', time: '10:20 AM', a: { type: 'lose', g: 13 }, b: { type: 'lose', g: 15 }, tag: '5th-8th Semi' },
-  27: { day: 'sat', site: 'SHP', time: '11:30 AM', a: { type: 'lose', g: 17 }, b: { type: 'lose', g: 19 }, tag: '5th-8th Semi' },
-  29: { day: 'sat', site: 'SHP', time: '12:40 PM', a: { type: 'lose', g: 21 }, b: { type: 'lose', g: 23 }, tag: '3rd Place' },
-  31: { day: 'sat', site: 'SHP', time: '1:50 PM',  a: { type: 'win', g: 21 },  b: { type: 'win', g: 23 },  tag: 'Championship' },
-  33: { day: 'sat', site: 'SHP', time: '3:00 PM',  a: { type: 'lose', g: 25 }, b: { type: 'lose', g: 27 }, tag: '7th Place' },
-  35: { day: 'sat', site: 'SHP', time: '4:10 PM',  a: { type: 'win', g: 25 },  b: { type: 'win', g: 27 },  tag: '5th Place' },
-
-  // Saturday Oct 17 - Los Altos High School
-  18: { day: 'sat', site: 'LAHS', time: '8:00 AM',  a: { type: 'win', g: 10 }, b: { type: 'win', g: 12 }, tag: '9th-12th Semi' },
-  20: { day: 'sat', site: 'LAHS', time: '9:10 AM',  a: { type: 'win', g: 14 }, b: { type: 'win', g: 16 }, tag: '9th-12th Semi' },
-  22: { day: 'sat', site: 'LAHS', time: '10:20 AM', a: { type: 'lose', g: 10 }, b: { type: 'lose', g: 12 }, tag: '13th-16th Semi' },
-  24: { day: 'sat', site: 'LAHS', time: '11:30 AM', a: { type: 'lose', g: 14 }, b: { type: 'lose', g: 16 }, tag: '13th-16th Semi' },
-  26: { day: 'sat', site: 'LAHS', time: '12:40 PM', a: { type: 'lose', g: 18 }, b: { type: 'lose', g: 20 }, tag: '11th Place' },
-  28: { day: 'sat', site: 'LAHS', time: '1:50 PM',  a: { type: 'win', g: 18 },  b: { type: 'win', g: 20 },  tag: '9th Place' },
-  30: { day: 'sat', site: 'LAHS', time: '3:00 PM',  a: { type: 'lose', g: 22 }, b: { type: 'lose', g: 24 }, tag: '15th Place' },
-  32: { day: 'sat', site: 'LAHS', time: '4:10 PM',  a: { type: 'win', g: 22 },  b: { type: 'win', g: 24 },  tag: '13th Place' }
-};
-
-let gameScores = {};
-
-function normalizeStr(s) {
-  return (s || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  return rows;
 }
 
-function isTrackedTeam(teamName) {
-  if (!teamName) return false;
-  const norm = normalizeStr(teamName);
-  return CONFIG.teamAliases.some(a => norm.includes(normalizeStr(a)));
+/* ============================================================
+   rows -> tournament model (nothing hardcoded about pools/games)
+   ============================================================ */
+const clean = s => (s || '').replace(/\s+/g, ' ').trim();
+const dateOf = s => { const m = clean(s).match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/); if (!m) return null; let y = m[3] ? +m[3] : new Date().getFullYear(); if (y < 100) y += 2000; return `${+m[1]}/${+m[2]}/${y}`; };
+const isDate = s => !!dateOf(s) && !/^\d{1,2}:\d{2}/.test(clean(s));
+const isTime = s => /^\d{1,2}:\d{2}(?::\d{2})?\s*(AM|PM)?$/i.test(clean(s)) || /^\d{1,2}\s*(AM|PM)$/i.test(clean(s));
+const gameNum = s => { const m = clean(s).match(/^(?:game|g)\s*#?\s*(\d+)$/i); return m ? +m[1] : null; };
+const isScoreHdr = s => /^score$/i.test(clean(s));
+const ordinal = n => n + (['th','st','nd','rd'][(n % 100 > 10 && n % 100 < 14) ? 0 : (n % 10 < 4 ? n % 10 : 0)]);
+
+function parseScorePair(a, b) {
+  const one = clean(a).match(/^(\d+)\s*[-–—:]\s*(\d+)$/);
+  if (one) return [+one[1], +one[2]];
+  const na = clean(a), nb = clean(b);
+  if (/^\d+$/.test(na) && /^\d+$/.test(nb)) return [+na, +nb];
+  return [null, null];
 }
-
-function resolveParticipant(spec) {
-  if (!spec) return null;
-  if (spec.type === 'static') return spec.name;
-  const outcome = getGameOutcome(spec.g);
-  if (!outcome) return null;
-  return spec.type === 'win' ? outcome.winner : outcome.loser;
+function parseSide(text) {
+  let s = clean(text);
+  const side = { raw: s, seed: null, ref: null, name: '' };
+  let m;
+  if ((m = s.match(/^(\d{1,2})\s+(.*)$/))) { side.seed = +m[1]; s = m[2]; }
+  if ((m = s.match(/^\(\s*([WL])\s*G?\s*(\d+)\s*([^)]*)\)\s*(.*)$/i))) {
+    side.ref = { kind: m[1].toUpperCase() === 'W' ? 'win' : 'lose', game: +m[2], poolHint: clean(m[3]) };
+    s = m[4];
+  } else if ((m = s.match(/^(winner|loser)\s*(?:of)?\s*#?\s*(?:game)?\s*#?\s*(\d+)\s*([A-Za-z.]*)\s*(.*)$/i))) {
+    side.ref = { kind: /^w/i.test(m[1]) ? 'win' : 'lose', game: +m[2], poolHint: '' };
+    s = clean(m[3] + ' ' + m[4]);
+  } else if ((m = s.match(/^(\d)(?:st|nd|rd|th)\s+(?:pool\s+)?([A-Z])\b\s*(.*)$/i))) {
+    side.ref = { kind: 'rank', rank: +m[1], pool: m[2].toUpperCase() };
+    s = m[3];
+  }
+  if ((m = s.match(/^(\d{1,2})\s+(.*)$/))) { side.seed = +m[1]; s = m[2]; }
+  side.name = clean(s.replace(/^[-–:]\s*/, ''));
+  if (/^(tbd|tba|bye)$/i.test(side.name)) { side.placeholderText = side.name.toUpperCase(); side.name = ''; }
+  return side;
 }
-
-function getGameTeams(gNum) {
-  const g = TOURNAMENT_GAMES[gNum];
-  if (!g) return [null, null];
-  return [resolveParticipant(g.a), resolveParticipant(g.b)];
+function parseMatchup(text) {
+  const parts = clean(text).split(/\s+vs?\.?\s+/i);
+  return [parseSide(parts[0] || ''), parseSide(parts[1] || '')];
 }
-
-function getGameOutcome(gNum) {
-  const [t1, t2] = getGameTeams(gNum);
-  const sc = gameScores[gNum];
-  if (!sc || sc.a === null || sc.b === null || isNaN(sc.a) || isNaN(sc.b)) return null;
-  const sa = Number(sc.a), sb = Number(sc.b);
-  if (sa === sb) return null;
-  return sa > sb ? { winner: t1, loser: t2, sa, sb } : { winner: t2, loser: t1, sa, sb };
+function findPool(model, text) {
+  const t = clean(text).toLowerCase();
+  if (!t) return null;
+  let p = model.pools.find(p => p.letter.toLowerCase() === t);
+  if (p) return p;
+  p = model.pools.find(p => t.startsWith(p.name.toLowerCase()) || p.name.toLowerCase().startsWith(t));
+  if (p) return p;
+  for (const [alias, rx] of Object.entries(POOL_ALIASES)) {
+    if (t === alias) { p = model.pools.find(p => rx.test(p.name)); if (p) return p; }
+  }
+  return model.pools.find(p => t.includes(p.name.toLowerCase())) || null;
 }
-
-/* =========================================================================
-   LIVE SHEET SYNC ENGINE (GVIZ & CSV FALLBACK)
-   ========================================================================= */
-function syncLiveSheet() {
-  const old = document.getElementById('gviz-sync');
-  if (old) old.remove();
-
-  const script = document.createElement('script');
-  script.id = 'gviz-sync';
-  script.src = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=responseHandler:handleLiveSheet&gid=${CONFIG.gid}&headers=0`;
-  document.body.appendChild(script);
-
-  // Parallel CSV Fetch in case of JSONP lag
-  fetch(`https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/export?format=csv&gid=${CONFIG.gid}`, { cache: 'no-store' })
-    .then(r => r.text())
-    .then(csv => parseCSVGrid(csv))
-    .catch(() => {});
+/* ----------------------------------------------------------------
+   Layout B ("flat"): one table per site/day with columns
+   Gm # | Time | Dark Caps | dark score | white score | White Caps | Type
+   Team names are already filled in by the sheet (e.g. "Cathedral (W13)"),
+   dates are written out ("Friday, October 16, 2026"), and venue addresses
+   sit in "Location Information:" blocks. Anchored on the Dark Caps /
+   White Caps headers so it still works if label cells come through blank.
+   ---------------------------------------------------------------- */
+const MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12 };
+function parseDateText(s) {          // "Friday, October 16, 2026" | "Oct 16" | "10/16/2026" | "2026-10-16" -> "10/16/2026"
+  const t = clean(s);
+  if (!t || /^\d{1,2}:\d{2}/.test(t)) return null;
+  let m = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s+(\d{4}))?/i);
+  if (m) return `${MONTHS[m[1].toLowerCase()]}/${+m[2]}/${m[3] ? +m[3] : new Date().getFullYear()}`;
+  m = t.match(/\b(\d{4})-(\d{2})-(\d{2})\b/);
+  if (m) return `${+m[2]}/${+m[3]}/${+m[1]}`;
+  return dateOf(t);
 }
-
-window.handleLiveSheet = function(res) {
-  if (!res || !res.table || !res.table.rows) return;
-  const matrix = res.table.rows.map(r => {
-    if (!r.c) return [];
-    return r.c.map(c => (c ? (c.f !== undefined ? c.f : (c.v !== undefined ? c.v : '')) : '').toString().trim());
-  });
-  extractTournamentScores(matrix);
-};
-
-function parseCSVGrid(csv) {
-  const matrix = csv.split(/\r?\n/).map(line => {
-    return line.split(',').map(c => c.replace(/^"|"\$/g, '').trim());
-  });
-  extractTournamentScores(matrix);
+function normTime(s) {
+  const t = clean(s);
+  let m = t.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i);
+  if (m) return `${+m[1]}:${m[2]} ${m[3].toUpperCase()}`;
+  m = t.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);            // 24-hour
+  if (m) { const h = +m[1]; return `${h % 12 || 12}:${m[2]} ${h >= 12 ? 'PM' : 'AM'}`; }
+  return t;
 }
+const bareNum = s => { const m = clean(s).match(/^#?(\d{1,3})$/); return m ? +m[1] : null; };
+const scoreCell = s => { const t = clean(s); return /^\d+$/.test(t) ? +t : null; };
+const cleanPlace = t => { const s = clean(t).replace(/([A-Za-z])-\s+/g, '$1-'); return /^[WL]\d+\s*vs\s*[WL]\d+$/i.test(s) ? '' : s; };
+function parseCapCell(text) {
+  const raw = clean(text);
+  const side = { raw, seed: null, ref: null, name: '' };
+  let m;
+  if (!raw) { side.placeholderText = 'TBD'; return side; }
+  if ((m = raw.match(/^(.*?)\s*\(\s*([WL])\s*#?(\d+)\s*\)\s*$/i)) && clean(m[1])) {
+    side.name = clean(m[1]);                                 // "Cathedral (W13)": name already filled in
+    side.from = { kind: m[2].toUpperCase() === 'W' ? 'win' : 'lose', game: +m[3] };
+  } else if ((m = raw.match(/^(?:tbd\s*)?\(?\s*([WL])\s*#?\s*(\d+)\s*\)?$/i)) || (m = raw.match(/^(winner|loser)\s*(?:of)?\s*(?:game\s*)?#?(\d+)$/i))) {
+    side.ref = { kind: /^w/i.test(m[1]) ? 'win' : 'lose', game: +m[2], poolHint: '' };   // not filled in yet: "W13"
+  } else if (/^(tbd|tba|bye)$/i.test(raw)) {
+    side.placeholderText = raw.toUpperCase();
+  } else side.name = raw;
+  return side;
+}
+function parseFlatSheet(rows) {
+  const model = { pools: [], standings: {}, days: [], teams: [], venues: [], rankings: [], byNum: {}, flat: true };
+  const cell = (r, c) => clean((rows[r] || [])[c]);
+  const width = Math.max(0, ...rows.map(r => (r || []).length));
 
-function extractTournamentScores(matrix) {
-  let scoresFound = 0;
+  // venues: "Location Information:" then name, then address lines, all in one column
+  for (let r = 0; r < rows.length; r++) for (let c = 0; c < width; c++) {
+    if (!/^location information:?$/i.test(cell(r, c))) continue;
+    const name = cell(r + 1, c);
+    if (!name) continue;
+    const lines = [];
+    for (let k = r + 2; k < Math.min(rows.length, r + 6); k++) { const t = cell(k, c); if (!t) break; lines.push(t); }
+    model.venues.push({ key: name.toLowerCase(), name, address: lines.join(', ') });
+  }
 
-  matrix.forEach((row, rIdx) => {
-    // 1. Time Shift Detection for Game 11 (Bishops)
-    const line = row.join(' ').toLowerCase();
-    if (CONFIG.teamAliases.some(a => line.includes(a))) {
-      const match = line.match(/(\d{1,2}:\d{2}\s*(?:am|pm)?)/i);
-      if (match) TOURNAMENT_GAMES[11].time = match[1].toUpperCase();
+  // final rankings: "Final Rankings" then "1st | Team" down two columns
+  for (let r = 0; r < rows.length; r++) for (let c = 0; c < width; c++) {
+    if (!/^final rankings:?$/i.test(cell(r, c))) continue;
+    for (let k = r + 1; k < rows.length; k++) {
+      const place = cell(k, c);
+      if (!/^\d{1,2}(st|nd|rd|th)$/i.test(place)) break;
+      const team = cell(k, c + 1);
+      if (team) model.rankings.push({ place, team });
     }
+  }
 
-    // 2. Scan Row by Game Number
-    row.forEach((cell, cIdx) => {
-      const numMatch = cell.match(/^#?\s*([0-9]{1,2})\$/);
-      if (numMatch) {
-        const gNum = parseInt(numMatch[1], 10);
-        if (TOURNAMENT_GAMES[gNum]) {
-          // Look across current row and next 2 rows for adjacent score pair
-          const neighborhood = [
-            ...(row.slice(cIdx, cIdx + 5)),
-            ...((matrix[rIdx + 1] || []).slice(cIdx, cIdx + 5))
-          ];
+  // table headers, anchored on Dark Caps ... White Caps
+  const heads = [];
+  for (let r = 0; r < rows.length; r++) for (let c = 2; c < width; c++) {
+    if (!/^dark\s*caps?$/i.test(cell(r, c))) continue;
+    let white = -1;
+    for (let j = c + 1; j < Math.min(width, c + 8); j++) if (/^white\s*caps?$/i.test(cell(r, j))) { white = j; break; }
+    if (white < 0) continue;
+    heads.push({ r, gm: c - 2, time: c - 1, dark: c, white, darkScore: c + 1, whiteScore: white - 1, type: white + 1 });
+  }
 
-          const ints = [];
-          neighborhood.forEach(v => {
-            if (v !== '' && !isNaN(v) && Number.isInteger(Number(v))) {
-              const val = Number(v);
-              if (val >= 0 && val <= 35 && val !== gNum) {
-                ints.push(val);
-              }
-            }
+  for (const h of heads) {
+    // date + location live above the header, in the Gm #/Time columns
+    let dateRow = -1, date = null;
+    for (let r = h.r - 1; r >= Math.max(0, h.r - 25) && !date; r--)
+      if (/^date:?$/i.test(cell(r, h.gm))) { const d = parseDateText(cell(r, h.time)); if (d) { date = d; dateRow = r; } }
+    for (let r = h.r - 1; r >= Math.max(0, h.r - 25) && !date; r--) {       // label cell missing: take the nearest date-looking value
+      const d = parseDateText(cell(r, h.time)); if (d) { date = d; dateRow = r; }
+    }
+    if (!date) continue;
+    let site = '';
+    for (let r = dateRow + 1; r < h.r && !site; r++) if (/^location:?$/i.test(cell(r, h.gm))) site = cell(r, h.time);
+    if (!site) site = cell(dateRow + 1, h.time);
+
+    let day = model.days.find(d => d.date === date);
+    if (!day) { day = { date, blocks: [] }; model.days.push(day); }
+    const block = { kind: 'group', label: site || 'Games', site, games: [], byNum: {} };
+    for (let r = h.r + 1; r < rows.length; r++) {
+      const num = bareNum(cell(r, h.gm));
+      const darkTxt = cell(r, h.dark), whiteTxt = cell(r, h.white);
+      if (num == null) { if (!darkTxt && !whiteTxt) break; continue; }
+      const sa = scoreCell(cell(r, h.darkScore)), sb = scoreCell(cell(r, h.whiteScore));
+      const g = {
+        num, time: normTime(cell(r, h.time)),
+        sides: [parseCapCell(darkTxt), parseCapCell(whiteTxt)],
+        score: (sa != null && sb != null) ? [sa, sb] : [null, null],
+        place: cleanPlace(cell(r, h.type)),
+        ctx: { type: 'group', block }, day, block,
+      };
+      block.games.push(g);
+      block.byNum[num] = g;
+      if (!model.byNum[num]) model.byNum[num] = g;
+      g.sides.forEach(s => { if (s.name && !model.teams.includes(s.name)) model.teams.push(s.name); });
+    }
+    day.blocks.push(block);
+  }
+  model.rankings.forEach(x => { if (!model.teams.includes(x.team)) model.teams.push(x.team); });
+  model.days.sort((a, b) => new Date(a.date) - new Date(b.date));
+  model.days.forEach((d, i) => d.index = i + 1);
+  return model;
+}
+function parseSheet(rows) {
+  const isFlat = rows.some(r => (r || []).some(c => /^dark\s*caps?$/i.test(clean(c))));
+  if (isFlat) { const m = parseFlatSheet(rows); if (m.days.length) return m; }
+  return parseLegacySheet(rows);
+}
+
+/* Layout A: "(A) Pool" seeding tables + per-pool Time/Game/Score columns. */
+function parseLegacySheet(rows) {
+  const model = { pools: [], standings: {}, days: [] };
+  const cell = (r, i) => clean((rows[r] || [])[i]);
+  const rowHasGame = (r, cols) => cols.some(i => isTime(cell(r, i)) || gameNum(cell(r, i)) != null);
+  let r = 0;
+  while (r < rows.length) {
+    const row = rows[r] || [];
+    const hdr = row.map((c, i) => { const m = clean(c).match(/^\(([A-Z])\)\s*(.+)$/); return m ? { i, letter: m[1], name: clean(m[2]) } : null; }).filter(Boolean);
+    if (hdr.length >= 2 && !model.pools.length) {
+      const stIdx = row.findIndex(c => /bottom|standing/i.test(c || ''));
+      hdr.forEach(h => model.pools.push({ letter: h.letter, name: h.name, teams: [], games: {} }));
+      r++;
+      let rank = 1;
+      while (r < rows.length && hdr.some(h => cell(r, h.i)) && !isDate(cell(r, 0))) {
+        hdr.forEach(h => { const t = cell(r, h.i); if (t && !/^(bye|tbd)$/i.test(t)) model.pools.find(p => p.letter === h.letter).teams.push(t); });
+        if (stIdx >= 0) {
+          model.pools.forEach((p, k) => {
+            const v = cell(r, stIdx + k);
+            if (v && !/^[A-Z]\s*\d+$/i.test(v)) model.standings[p.letter + rank] = v;
           });
-
-          if (ints.length >= 2) {
-            gameScores[gNum] = { a: ints[0], b: ints[1] };
-            scoresFound++;
+        }
+        rank++; r++;
+      }
+      continue;
+    }
+    if (isDate(cell(r, 0))) {
+      const date = dateOf(cell(r, 0));
+      let day = model.days.find(d => d.date === date);
+      if (!day) { day = { date, blocks: [] }; model.days.push(day); }
+      if (row.some(isScoreHdr)) {
+        const cols = [];
+        let prevScore = 0;
+        row.forEach((c, i) => {
+          if (i === 0 || !clean(c) || isScoreHdr(c)) return;
+          const p = findPool(model, c);
+          if (!p) return;
+          let sc = -1; for (let j = i + 1; j < row.length; j++) if (isScoreHdr(row[j])) { sc = j; break; }
+          if (sc < 0) return;
+          const span = []; for (let j = prevScore; j < sc; j++) span.push(j);
+          let time = -1, game = -1;
+          for (let rr = r + 1; rr < Math.min(rows.length, r + 12) && (time < 0 || game < 0); rr++) {
+            if (time < 0) time = span.find(j => isTime(cell(rr, j))) ?? -1;
+            if (game < 0) game = span.find(j => gameNum(cell(rr, j)) != null) ?? -1;
           }
+          if (game < 0) game = i;
+          if (time < 0) time = Math.max(prevScore, game - 1);
+          cols.push({ pool: p, time, game, matchup: sc - 1, score: sc });
+          prevScore = sc + 1;
+        });
+        if (cols.length) {
+          const blocks = cols.map(c => ({ kind: 'pool', pool: c.pool, label: `${c.pool.name} Pool`, site: c.pool.name, games: [] }));
+          r++;
+          const watch = cols.flatMap(c => [c.time, c.game]);
+          while (r < rows.length && !isDate(cell(r, 0)) && rowHasGame(r, watch)) {
+            cols.forEach((c, k) => {
+              const num = gameNum(cell(r, c.game));
+              if (num == null) return;
+              const g = { num, time: cell(r, c.time), sides: parseMatchup(cell(r, c.matchup)),
+                score: parseScorePair(cell(r, c.score), ''), place: '', ctx: { type: 'pool', pool: c.pool }, day, block: blocks[k] };
+              blocks[k].games.push(g);
+              c.pool.games[num] = g;
+            });
+            r++;
+          }
+          blocks.forEach(b => day.blocks.push(b));
+          continue;
         }
       }
-    });
-  });
-
-  document.getElementById('syncStatus').innerText = 
-    `Live Sync Active · ${scoresFound} scores loaded (${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})})`;
-  renderAll();
+      const block = { kind: 'group', label: cell(r, 1).replace(/^\((.*)\)$/, '$1') || 'Placement', site: cell(r, 2), games: [], byNum: {} };
+      let col = { time: 0, game: 1, dark: 2, darkScore: 3, white: 4, whiteScore: 5, place: 6 };
+      r++;
+      const h = rows[r] || [];
+      const hi = rx => h.findIndex(c => rx.test(clean(c)));
+      if (hi(/^time$/i) >= 0 || hi(/^dark$/i) >= 0 || hi(/^white$/i) >= 0) {
+        const t = hi(/^time$/i), d = hi(/^dark$/i), w = hi(/^white$/i);
+        if (t >= 0) col.time = t;
+        if (d >= 0) { col.dark = d; col.darkScore = d + 1; col.game = d - 1; }
+        if (w >= 0) { col.white = w; col.whiteScore = w + 1; col.place = w + 2; }
+        r++;
+      }
+      while (r < rows.length && !isDate(cell(r, 0)) && rowHasGame(r, [col.time, col.game])) {
+        const num = gameNum(cell(r, col.game));
+        if (num != null) {
+          let score = parseScorePair(cell(r, col.darkScore), cell(r, col.whiteScore));
+          if (score[0] == null) score = parseScorePair(cell(r, col.darkScore), '');
+          const g = { num, time: cell(r, col.time), sides: [parseSide(cell(r, col.dark)), parseSide(cell(r, col.white))],
+            score, place: cell(r, col.place), ctx: { type: 'group', block }, day, block };
+          block.games.push(g);
+          block.byNum[num] = g;
+        }
+        r++;
+      }
+      day.blocks.push(block);
+      continue;
+    }
+    r++;
+  }
+  model.days.sort((a, b) => new Date(a.date) - new Date(b.date));
+  model.days.forEach((d, i) => d.index = i + 1);
+  return model;
 }
 
-/* =========================================================================
-   UI RENDERING
-   ========================================================================= */
-function updateBishopsHeroRadar() {
-  let nextMatch = null;
-
-  // Search chronological games
-  const gameOrder = [11, 19, 16, 21, 23, 25, 27, 18, 20, 22, 24, 31, 29, 35, 33, 28, 26, 32, 30];
-  for (const gNum of gameOrder) {
-    const [t1, t2] = getGameTeams(gNum);
-    const outcome = getGameOutcome(gNum);
-    if (!outcome && (isTrackedTeam(t1) || isTrackedTeam(t2))) {
-      const g = TOURNAMENT_GAMES[gNum];
-      nextMatch = {
-        gNum,
-        t1,
-        t2,
-        time: g.time,
-        tag: `Game ${gNum} · ${g.tag}`,
-        venue: CONFIG.venues[g.site]
-      };
-      break;
-    }
+/* ============================================================
+   Resolving who plays whom from references + scores
+   ============================================================ */
+function gameOutcome(model, g, depth = 0) {
+  const [sa, sb] = g.score;
+  if (sa == null || sb == null || sa === sb || depth > 30) return null;
+  const a = resolveSide(model, g.sides[0], g.ctx, depth + 1);
+  const b = resolveSide(model, g.sides[1], g.ctx, depth + 1);
+  if (!a.name || !b.name) return null;
+  return sa > sb ? { winner: a.name, loser: b.name } : { winner: b.name, loser: a.name };
+}
+function computeRank(model, pool, rank, depth) {
+  const games = Object.values(pool.games);
+  const firstRound = games.filter(g => !g.sides[0].ref && !g.sides[1].ref);
+  const losers = [];
+  for (const g of firstRound) { const o = gameOutcome(model, g, depth + 1); if (!o) return null; losers.push(o.loser); }
+  if (!losers.length) return null;
+  const table = Object.fromEntries(losers.map(t => [t, { w: 0, gd: 0, gf: 0, played: 0 }]));
+  for (const g of games) {
+    if (firstRound.includes(g)) continue;
+    const a = resolveSide(model, g.sides[0], g.ctx, depth + 1).name, b = resolveSide(model, g.sides[1], g.ctx, depth + 1).name;
+    if (!table[a] || !table[b]) continue;
+    const [sa, sb] = g.score;
+    if (sa == null || sb == null) return null;
+    table[a].played++; table[b].played++;
+    table[a].gd += sa - sb; table[b].gd += sb - sa; table[a].gf += sa; table[b].gf += sb;
+    if (sa > sb) table[a].w++; else if (sb > sa) table[b].w++;
   }
-
-  if (nextMatch) {
-    document.getElementById('knightsT1').innerText = nextMatch.t1 || 'Bishops';
-    document.getElementById('knightsT2').innerText = nextMatch.t2 || 'TBD';
-    document.getElementById('knightsDeckTime').innerText = `${nextMatch.time} (On deck ${CONFIG.warmupMinutesPrior}m prior)`;
-    document.getElementById('knightsMatchTag').innerText = `${nextMatch.tag} · ${nextMatch.venue.name}`;
-    document.getElementById('knightsVenueText').innerText = `${nextMatch.venue.name} — ${nextMatch.venue.address}`;
-    document.getElementById('knightsMapLink').href = nextMatch.venue.gmap;
-  } else {
-    document.getElementById('knightsT1').innerText = CONFIG.trackedTeam;
-    document.getElementById('knightsT2').innerText = "Tournament Complete";
-    document.getElementById('knightsDeckTime').innerText = "All matches finished";
+  const expected = losers.length - 1;
+  if (losers.some(t => table[t].played < expected)) return null;
+  const sorted = losers.slice().sort((x, y) => table[y].w - table[x].w || table[y].gd - table[x].gd || table[y].gf - table[x].gf);
+  const pick = sorted[rank - 1];
+  if (!pick) return null;
+  const tie = sorted.filter(t => table[t].w === table[pick].w && table[t].gd === table[pick].gd && table[t].gf === table[pick].gf);
+  return tie.length > 1 ? null : pick;
+}
+function resolveSide(model, side, ctx, depth = 0) {
+  if (side.name) return { name: side.name, inferred: false };
+  const ref = side.ref;
+  if (!ref) return { name: '', placeholder: side.placeholderText || side.raw || 'TBD' };
+  if (depth > 30) return { name: '', placeholder: side.raw };
+  if (ref.kind === 'rank') {
+    const pool = model.pools.find(p => p.letter === ref.pool);
+    const fromSheet = model.standings[ref.pool + ref.rank];
+    if (fromSheet) return { name: fromSheet, inferred: false };
+    const computed = pool ? computeRank(model, pool, ref.rank, depth) : null;
+    if (computed) return { name: computed, inferred: true };
+    return { name: '', placeholder: `${ordinal(ref.rank)} Pool ${ref.pool}${pool ? ' (' + pool.name + ')' : ''}` };
   }
+  let game = null, where = '';
+  if (ctx.type === 'pool') { game = ctx.pool.games[ref.game]; }
+  else {
+    const hinted = ref.poolHint ? findPool(model, ref.poolHint) : null;
+    if (hinted) { game = hinted.games[ref.game]; where = hinted.name; }
+    else game = ctx.block.byNum[ref.game] || (model.byNum && model.byNum[ref.game]);
+  }
+  const label = `${ref.kind === 'win' ? 'Winner' : 'Loser'} G${ref.game}${where ? ' ' + where : ''}`;
+  if (!game) return { name: '', placeholder: label };
+  const o = gameOutcome(model, game, depth + 1);
+  if (o) return { name: ref.kind === 'win' ? o.winner : o.loser, inferred: true };
+  return { name: '', placeholder: label };
 }
 
-function renderSiteSection(targetId, siteKey, dayKey, sectionTitle) {
-  const container = document.getElementById(targetId);
-  const venue = CONFIG.venues[siteKey];
+/* ============================================================
+   Time / venue helpers
+   ============================================================ */
+function gameDate(g) {
+  const m = clean(g.time).match(/^(\d{1,2})(?::(\d{2}))?(?::\d{2})?\s*(AM|PM)?$/i);
+  const d = new Date(g.day.date);
+  if (!m || isNaN(d)) return null;
+  let h = +m[1]; const ap = (m[3] || '').toUpperCase();
+  if (ap === 'PM' && h < 12) h += 12;
+  if (ap === 'AM' && h === 12) h = 0;
+  d.setHours(h, +(m[2] || 0), 0, 0);
+  return d;
+}
+function shortDate(s) { const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
+function venueFor(text) {
+  const t = clean(text).toLowerCase();
+  if (!t) return null;
+  const mine = (model && model.venues) || [];
+  const hit = mine.find(v => v.key === t) || mine.find(v => t.includes(v.key) || v.key.includes(t));
+  return hit || VENUES.find(v => v.match.test(text || '')) || null;
+}
+const venueQuery = v => [v.name, v.address].filter(Boolean).join(', ');
+function mapsUrl(v) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(venueQuery(v)); }
+function appleMapsUrl(v) { return 'http://maps.apple.com/?q=' + encodeURIComponent(venueQuery(v)); }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
-  const gNums = Object.keys(TOURNAMENT_GAMES)
-    .map(Number)
-    .filter(gNum => TOURNAMENT_GAMES[gNum].day === dayKey && TOURNAMENT_GAMES[gNum].site === siteKey);
+/* ============================================================
+   Followed team (defaults to Bishops, switchable)
+   ============================================================ */
+let followedTeam = DEFAULT_TEAM;
+try { followedTeam = localStorage.getItem('bhs_tracker_team') || DEFAULT_TEAM; } catch (e) {}
+function teamMatches(name) { return clean(name).toLowerCase() === followedTeam.trim().toLowerCase(); }
 
-  const rowsHtml = gNums.map(gNum => {
-    const g = TOURNAMENT_GAMES[gNum];
-    const [t1, t2] = getGameTeams(gNum);
-    const outcome = getGameOutcome(gNum);
-    const isKnights = isTrackedTeam(t1) || isTrackedTeam(t2);
+function populateTeamSelect(m) {
+  const sel = document.getElementById('teamSelect');
+  const teams = [...new Set([...m.pools.flatMap(p => p.teams), ...(m.teams || [])])].filter(Boolean).sort();
+  if (!teams.length) return;
+  const current = sel.value || followedTeam;
+  sel.innerHTML = teams.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
+  followedTeam = teams.includes(current) ? current : (teams.includes(DEFAULT_TEAM) ? DEFAULT_TEAM : teams[0]);
+  sel.value = followedTeam;
+}
 
-    let scoreMarkup = `<span style="color:var(--muted); font-size:0.8rem;">Upcoming</span>`;
-    if (outcome) {
-      scoreMarkup = `
-        <span class="final-pill">Final</span>
-        <span class="score-badge ${outcome.winner === t1 ? 'winner' : ''}">${outcome.sa}</span>
-        <span style="color:var(--muted); font-size:0.8rem;">-</span>
-        <span class="score-badge ${outcome.winner === t2 ? 'winner' : ''}">${outcome.sb}</span>
-      `;
-    }
+/* ============================================================
+   Rendering
+   ============================================================ */
+let model = null;
+let activeTab = null;
+try { activeTab = localStorage.getItem('bhs_tracker_tab'); } catch (e) {}
 
+function allGames(m) {
+  const list = [];
+  m.days.forEach(d => d.blocks.forEach(b => b.games.forEach(g => list.push(g))));
+  return list.sort((a, b) => (gameDate(a) || 0) - (gameDate(b) || 0) || a.num - b.num);
+}
+function describe(m, g) {
+  const sides = g.sides.map(s => resolveSide(m, s, g.ctx));
+  const outcome = gameOutcome(m, g);
+  const ours = sides.some(s => teamMatches(s.name));
+  const when = gameDate(g);
+  const now = Date.now();
+  const scored = g.score[0] != null && g.score[1] != null;
+  const live = !scored && when && now >= when.getTime() && now < when.getTime() + 2 * 3600e3;
+  return { sides, outcome, ours, when, scored, live };
+}
+function renderTeam(s, capClass, ourFlag, won) {
+  const cls = ['team', ourFlag ? 'us' : '', won ? 'won' : '', !s.name ? 'tbd' : '', s.inferred ? 'proj' : ''].filter(Boolean).join(' ');
+  return `<div class="${cls}"><span class="cap ${capClass}" title="${capClass} caps"></span><span class="name">${esc(s.name || s.placeholder || 'TBD')}</span></div>`;
+}
+function renderGame(m, g) {
+  const d = describe(m, g);
+  const [a, b] = d.sides;
+  const wonA = d.outcome && d.outcome.winner === a.name, wonB = d.outcome && d.outcome.winner === b.name;
+  const scoreHtml = d.scored
+    ? `<span class="${wonA ? 'won' : ''}">${g.score[0]}</span><span class="${wonB ? 'won' : ''}">${g.score[1]}</span>`
+    : `<span class="pending ${d.live ? 'live' : ''}">${d.live ? 'In progress' : (a.name && b.name ? 'Upcoming' : 'TBD')}</span>`;
+  return `
+  <div class="game ${d.ours ? 'ours' : ''} ${d.live ? 'live' : ''}">
+    <div class="g-when">
+      <span class="g-time">${esc(g.time)}</span>
+      <span class="g-num">Game ${g.num}</span>
+      ${g.place ? `<span class="g-place">${esc(g.place)}</span>` : ''}
+    </div>
+    <div class="g-teams">
+      ${renderTeam(a, 'dark', teamMatches(a.name), wonA)}
+      ${renderTeam(b, 'white', teamMatches(b.name), wonB)}
+    </div>
+    <div class="g-score">${scoreHtml}</div>
+  </div>`;
+}
+function renderBlock(m, b) {
+  const venue = venueFor(b.site);
+  const link = venue
+    ? `<div class="card-links"><a href="${mapsUrl(venue)}" target="_blank" rel="noopener">📍 ${esc(venue.name)}</a><a href="${appleMapsUrl(venue)}" target="_blank" rel="noopener">Apple Maps</a></div>`
+    : (b.site ? `<span class="card-sub">${esc(b.site)}</span>` : '');
+  return `
+  <div class="bracket-card">
+    <div class="card-header">
+      <div><span class="card-title">${esc(b.label)}</span>${b.kind === 'group' && b.site && b.site !== b.label ? `<div class="card-sub">${esc(b.site)}</div>` : ''}</div>
+      ${link}
+    </div>
+    ${b.games.length ? b.games.map(g => renderGame(m, g)).join('') : '<div class="empty">No games listed yet.</div>'}
+  </div>`;
+}
+function renderPools(m) {
+  return m.pools.map(p => {
+    const venue = venueFor(p.name);
+    const rows = p.teams.map((t, i) => `<tr class="${teamMatches(t) ? 'us' : ''}"><td class="seed">${i + 1}</td><td><strong>${esc(t)}</strong></td></tr>`).join('');
     return `
-      <div class="game-item ${isKnights ? 'highlighted' : ''}">
-        <div style="flex:1;">
-          <div class="game-meta">Game ${gNum} · ${g.time} · <span style="color:var(--bishops-gold); font-weight:600;">${g.tag}</span></div>
-          <div class="match-teams">
-            <span class="${!t1 ? 'tbd-team' : ''}" style="${isTrackedTeam(t1)?'color:var(--bishops-gold);font-weight:700;':(outcome && outcome.winner===t1?'color:var(--win);font-weight:700;':'')}">${t1 || 'TBD'}</span>
-            <span style="color:var(--muted);margin:0 4px;">vs</span>
-            <span class="${!t2 ? 'tbd-team' : ''}" style="${isTrackedTeam(t2)?'color:var(--bishops-gold);font-weight:700;':(outcome && outcome.winner===t2?'color:var(--win);font-weight:700;':'')}">${t2 || 'TBD'}</span>
-          </div>
-        </div>
-        <div class="score-display">${scoreMarkup}</div>
-      </div>
-    `;
-  }).join('');
-
-  container.innerHTML = `
     <div class="bracket-card">
       <div class="card-header">
-        <span class="card-title">${sectionTitle}</span>
-        <a href="${venue.gmap}" target="_blank" style="color:var(--bishops-gold-light); font-size:0.8rem; text-decoration:none;">📍 ${venue.name}</a>
+        <span class="card-title">Pool ${esc(p.letter)} · ${esc(p.name)}</span>
+        ${venue ? `<div class="card-links"><a href="${mapsUrl(venue)}" target="_blank" rel="noopener">📍 ${esc(venue.name)}</a><a href="${appleMapsUrl(venue)}" target="_blank" rel="noopener">Apple Maps</a></div>` : ''}
       </div>
-      ${rowsHtml}
-    </div>
-  `;
+      <table><thead><tr><th>Seed</th><th>Team</th></tr></thead><tbody>${rows}</tbody></table>
+    </div>`;
+  }).join('') || '<div class="empty">No pools found in the sheet.</div>';
 }
-
+function renderRankings(m) {
+  const rows = (m.rankings || []).map(x => `<tr class="${teamMatches(x.team) ? 'us' : ''}"><td class="seed">${esc(x.place)}</td><td><strong>${esc(x.team)}</strong></td></tr>`).join('');
+  return `
+  <div class="bracket-card">
+    <div class="card-header"><span class="card-title">Final rankings</span></div>
+    <table><thead><tr><th>Place</th><th>Team</th></tr></thead><tbody>${rows}</tbody></table>
+  </div>`;
+}
+function dateRangeLabel(m) {
+  const fmt = s => { const d = new Date(s); return isNaN(d) ? '' : d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); };
+  if (!m || !m.days.length) return '';
+  const a = fmt(m.days[0].date), b = fmt(m.days[m.days.length - 1].date);
+  return a === b ? a : `${a} – ${b}`;
+}
+function eventLabel() { return SHEET_ID === DEFAULT_SHEET_ID ? DEFAULT_EVENT_NAME : 'Tournament tracker'; }
+function renderTabs(m) {
+  const nav = document.getElementById('tabNav');
+  const panels = document.getElementById('panels');
+  const tabs = m.days.map(d => ({ id: 'day' + d.index, label: `Day ${d.index}`, sub: shortDate(d.date), html: d.blocks.map(b => renderBlock(m, b)).join('') || '<div class="empty">Nothing scheduled yet.</div>' }));
+  if (m.pools.length) tabs.push({ id: 'pools', label: 'Pools', sub: 'Seeds', html: renderPools(m) });
+  if ((m.rankings || []).length) tabs.push({ id: 'results', label: 'Results', sub: 'Final rankings', html: renderRankings(m) });
+  if (!tabs.some(t => t.id === activeTab)) {
+    const todayKey = new Date().toDateString();
+    const today = m.days.find(d => new Date(d.date).toDateString() === todayKey);
+    activeTab = today ? 'day' + today.index : (tabs[0] && tabs[0].id);
+  }
+  nav.innerHTML = tabs.map(t => `<button type="button" data-tab="${t.id}" class="${t.id === activeTab ? 'active' : ''}">${t.label}<small>${esc(t.sub)}</small></button>`).join('');
+  panels.innerHTML = tabs.map(t => `<div class="panel ${t.id === activeTab ? 'active' : ''}" id="panel-${t.id}">${t.html}</div>`).join('');
+}
+function renderNext(m) {
+  const games = allGames(m);
+  const ours = games.map(g => ({ g, d: describe(m, g) })).filter(x => x.d.ours);
+  const next = ours.find(x => !x.d.scored);
+  const t1 = document.getElementById('nextT1'), t2 = document.getElementById('nextT2');
+  const mapEl = document.getElementById('nextMap'), appleEl = document.getElementById('nextMapApple');
+  const showDeck = DECK_CALL_TEAMS.has(followedTeam);
+  if (next) {
+    const { g, d } = next;
+    const us = d.sides.find(s => teamMatches(s.name)), them = d.sides.find(s => !teamMatches(s.name)) || { name: '' };
+    t1.textContent = us.name;
+    t1.className = 'team-focus us';
+    t2.textContent = them.name || them.placeholder || 'TBD';
+    t2.className = 'team-focus right' + (them.name ? '' : ' tbd');
+    document.getElementById('nextPill').textContent = d.live ? `${followedTeam} in the water now` : `${followedTeam} next game`;
+    const deckSuffix = d.live ? '' : (showDeck ? ' · on deck 60 min prior — sometimes earlier, confirm with your coach' : '');
+    document.getElementById('nextTime').textContent = `${shortDate(g.day.date)} · ${g.time}${deckSuffix}`;
+    document.getElementById('nextTag').textContent = `${g.block.label} · Game ${g.num}${g.place ? ' · ' + g.place : ''}${them.inferred ? ' · opponent projected from scores' : ''}`;
+    const venue = venueFor(g.block.site);
+    document.getElementById('nextVenue').textContent = venue ? [venue.name, venue.address].filter(Boolean).join(' — ') : (g.block.site || '');
+    if (venue) { mapEl.href = mapsUrl(venue); mapEl.hidden = false; appleEl.href = appleMapsUrl(venue); appleEl.hidden = false; }
+    else { mapEl.hidden = true; appleEl.hidden = true; }
+  } else {
+    t1.textContent = followedTeam;
+    t1.className = 'team-focus us';
+    t2.textContent = ours.length ? 'Done' : 'Not found';
+    t2.className = 'team-focus right tbd';
+    document.getElementById('nextPill').textContent = followedTeam;
+    document.getElementById('nextTime').textContent = ours.length ? 'All games complete' : '';
+    const rk = (m.rankings || []).find(x => teamMatches(x.team));
+    document.getElementById('nextTag').textContent = ours.length ? `Tournament complete${rk ? ' · finished ' + rk.place : ''}` : `No ${followedTeam} games found in the sheet yet`;
+    document.getElementById('nextVenue').textContent = '';
+    mapEl.hidden = true; appleEl.hidden = true;
+  }
+  document.getElementById('ourGames').innerHTML = ours.map(({ g, d }) => {
+    const them = d.sides.find(s => !teamMatches(s.name)) || { name: '' };
+    const usIdx = d.sides.findIndex(s => teamMatches(s.name));
+    let cls = '', txt = '';
+    if (d.scored) {
+      const won = d.outcome && teamMatches(d.outcome.winner);
+      cls = won ? 'won' : 'lost';
+      txt = `${won ? 'W' : 'L'} ${g.score[usIdx]}–${g.score[1 - usIdx]} vs ${them.name}`;
+    } else {
+      cls = next && next.g === g ? 'next' : '';
+      txt = `${g.time} vs ${them.name || them.placeholder || 'TBD'}`;
+    }
+    return `<span class="our-game ${cls}" title="Day ${g.day.index} · ${esc(g.block.label)} · Game ${g.num}">D${g.day.index} · ${esc(txt)}</span>`;
+  }).join('');
+}
 function renderAll() {
-  updateBishopsHeroRadar();
-  renderSiteSection('friSHPList', 'SHP', 'fri', 'Sacred Heart Prep (Main Bracket)');
-  renderSiteSection('friLAHSList', 'LAHS', 'fri', 'Los Altos High School (Consolation)');
-  renderSiteSection('satSHPList', 'SHP', 'sat', 'Sacred Heart Prep (1st–8th Place)');
-  renderSiteSection('satLAHSList', 'LAHS', 'sat', 'Los Altos High School (9th–16th Place)');
+  if (!model) return;
+  populateTeamSelect(model);
+  const range = dateRangeLabel(model);
+  document.getElementById('subtitle').textContent = eventLabel() + (range ? ' · ' + range : '');
+  renderNext(model);
+  renderTabs(model);
 }
 
-document.getElementById('tabNav').addEventListener('click', (e) => {
-  const btn = e.target.closest('button');
-  if (!btn) return;
-  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
-});
+/* ============================================================
+   Fetching — tries the sheet's CSV export first (exact cell text),
+   then Google's script-tag (JSONP) endpoint, which also works on
+   hosts that block fetch() to other sites. Each attempt is checked
+   by actually parsing it, so a wrong tab just moves on to the next.
+   ============================================================ */
+let lastGood = null, timer = null, usingSnapshot = false;
+function setSync(state, text, detail) {
+  const el = document.getElementById('sync');
+  el.className = 'sync ' + state;
+  const t = document.getElementById('syncText');
+  t.textContent = text;
+  t.title = detail || '';
+}
+function fetchViaJsonp(baseUrl, timeoutMs = 12000) {
+  return new Promise((resolve, reject) => {
+    const cbName = '__sheetCb_' + Math.random().toString(36).slice(2);
+    let done = false;
+    const script = document.createElement('script');
+    const cleanup = () => { try { delete window[cbName]; } catch (e) { window[cbName] = undefined; } script.remove(); clearTimeout(timer2); };
+    const timer2 = setTimeout(() => { if (done) return; done = true; cleanup(); reject(new Error('timed out')); }, timeoutMs);
+    window[cbName] = (json) => { if (done) return; done = true; cleanup(); resolve(json); };
+    script.onerror = () => { if (done) return; done = true; cleanup(); reject(new Error('script failed to load')); };
+    script.src = baseUrl + '&tqx=' + encodeURIComponent('out:json;responseHandler:' + cbName);
+    document.head.appendChild(script);
+  });
+}
+function jsonToRows(json) {
+  if (!json || !json.table) throw new Error('unexpected response shape');
+  if (json.status === 'error') throw new Error((json.errors && json.errors[0] && json.errors[0].detailed_message) || 'sheet returned an error');
+  return (json.table.rows || []).map(r => (r.c || []).map(c => {
+    if (!c) return '';
+    if (c.f != null && c.f !== '') return String(c.f);
+    if (c.v != null) return String(c.v);
+    return '';
+  }));
+}
+async function fetchViaCsv() {
+  const res = await fetch(sheetCsvUrl(), { cache: 'no-store', credentials: 'omit' });
+  if (!res.ok) throw new Error('export returned ' + res.status);
+  const text = await res.text();
+  if (/^\s*<(!doctype|html)/i.test(text)) throw new Error('export returned a web page instead of data');
+  return parseCSV(text);
+}
+const looksLikeSchedule = rows => rows.some(r => r.some(c => /dark\s*caps?/i.test(c) || /game\s*#?\s*\d+/i.test(c)));
+async function fetchRows() {
+  const errors = [];
+  let reached = false;
+  const attempts = [
+    { name: 'csv', run: fetchViaCsv },
+    { name: 'tab by id', run: async () => jsonToRows(await fetchViaJsonp(sheetQueryUrl(null))) },
+    ...SHEET_TABS.map(t => ({ name: `tab "${t}"`, run: async () => jsonToRows(await fetchViaJsonp(sheetQueryUrl(t))) })),
+  ];
+  for (const a of attempts) {
+    try {
+      const rows = await a.run();
+      reached = true;
+      if (!looksLikeSchedule(rows)) { errors.push(`${a.name}: no schedule on this tab`); continue; }
+      if (!parseSheet(rows).days.length) { errors.push(`${a.name}: layout not recognised`); continue; }
+      return rows;
+    } catch (e) { errors.push(`${a.name}: ${e.message}`); }
+  }
+  const err = new Error(errors.join('; ') || 'unreachable');
+  err.reached = reached;
+  throw err;
+}
+function applyRows(rows) {
+  const parsed = parseSheet(rows);
+  if (!parsed.days.length) throw new Error('no schedule blocks found');
+  model = parsed;
+  renderAll();
+}
+async function refresh(manual) {
+  clearTimeout(timer);
+  setSync('loading', manual ? 'Refreshing…' : 'Checking the sheet…');
+  try {
+    const rows = await fetchRows();
+    applyRows(rows);
+    lastGood = new Date(); usingSnapshot = false;
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at: lastGood.toISOString(), rows })); } catch (e) {}
+    setSync('ok', `Live from the sheet · updated ${lastGood.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`);
+  } catch (e) {
+    console.warn('[tracker]', e.message);
+    const snapLabel = new Date(SNAPSHOT.at).toLocaleDateString([], { month: 'short', day: 'numeric' }) + ' ' + new Date(SNAPSHOT.at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const since = usingSnapshot ? `showing saved copy from ${snapLabel}` : lastGood ? `showing data from ${lastGood.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}` : 'no data yet';
+    setSync('error', e.reached ? `Reached the sheet but couldn't read its layout · ${since} · retrying` : `Can't reach the sheet · ${since} · retrying`, e.message);
+  }
+  timer = setTimeout(() => refresh(false), REFRESH_MS);
+}
 
-renderAll();
-syncLiveSheet();
-setInterval(syncLiveSheet, CONFIG.pollIntervalMs);
+/* ============================================================
+   Wiring
+   ============================================================ */
+document.getElementById('subtitle').textContent = eventLabel();
+document.getElementById('sheetLink').href = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit#gid=${SHEET_GID}`;
+document.getElementById('refreshBtn').addEventListener('click', () => refresh(true));
+document.getElementById('changeSheetBtn').addEventListener('click', () => {
+  const current = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit#gid=${SHEET_GID}`;
+  const input = window.prompt(
+    "Paste the Google Sheet link for the tournament to track.\nLeave this blank and press OK to reset to the default sheet.",
+    current
+  );
+  if (input === null) return; // cancelled
+  const trimmed = input.trim();
+  try { localStorage.removeItem(CACHE_KEY); } catch (e) {}
+  try { localStorage.removeItem('bhs_tracker_tab'); } catch (e) {}
+  if (!trimmed) {
+    try { localStorage.removeItem(SHEET_OVERRIDE_KEY); } catch (e) {}
+    location.reload();
+    return;
+  }
+  const parsed = extractSheetIdAndGid(trimmed);
+  if (!parsed) {
+    alert("Couldn't find a sheet ID in that link — paste the full Google Sheets URL (the one containing \"/d/\").");
+    return;
+  }
+  try { localStorage.setItem(SHEET_OVERRIDE_KEY, JSON.stringify(parsed)); } catch (e) {}
+  location.reload();
+});
+document.getElementById('tabNav').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-tab]');
+  if (!btn) return;
+  activeTab = btn.dataset.tab;
+  try { localStorage.setItem('bhs_tracker_tab', activeTab); } catch (e) {}
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('active', b === btn));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + activeTab));
+});
+document.getElementById('teamSelect').addEventListener('change', e => {
+  followedTeam = e.target.value;
+  try { localStorage.setItem('bhs_tracker_team', followedTeam); } catch (err) {}
+  renderAll();
+});
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(false); });
+
+try {
+  const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+  if (cached && cached.rows) { applyRows(cached.rows); lastGood = new Date(cached.at); }
+  else if (SHEET_ID === DEFAULT_SHEET_ID && SHEET_GID === DEFAULT_SHEET_GID) { applyRows(SNAPSHOT.rows); lastGood = new Date(SNAPSHOT.at); usingSnapshot = true; setSync('loading', 'Showing saved copy · checking the sheet…'); }
+} catch (e) {}
+refresh(false);
+setInterval(renderAll, 30 * 1000);
 </script>
 </body>
 </html>
